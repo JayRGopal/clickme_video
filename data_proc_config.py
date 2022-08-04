@@ -1,4 +1,6 @@
-import os 
+# TODO: Convert into a yaml and use pyyaml insead of class/function-based configs
+import os
+
 
 class Map(dict):
     """
@@ -34,62 +36,57 @@ class Map(dict):
         del self.__dict__[key]
 
 def project_settings():
-    node_name = os.uname()[1]
+    node_name = os.uname()[1]  # If you want a machine-conditional path use this
 
-    if node_name == 'x8':
-        model_path = '/media/data_gluster/attention/mlnet/'
-        tf_path = '/media/data_gluster/attention/tf_experiments/'
-    elif node_name == 'x9':
-        model_path = '/home/drew/Documents/mlnet/'
-        tf_path = '/home/drew/Documents/tf_experiments/'
-    elif node_name == 'g15':
-        model_path = '/home/drew/clickmap_prediction/'
-        tf_path = '/home/drew/tf_experiments/'
-        mirc_image_path = '/home/drew/webapp_data/mircs/'
-        nsf_image_path = '/home/drew/webapp_data/nsf_images/'
-        imagenet_train_path = '/home/drew/webapp_data/lmdb_trains/'
-        imagenet_validation_path = '/home/drew/webapp_data/lmdb_validations/'
-    else:
-        model_path = '/home/youssef/clickmap_prediction/'
-        tf_path = '/home/youssef/tf_experiments/'
-        mirc_image_path = '/media/data_cifs/clicktionary/webapp_data/mircs/'
-        nsf_image_path = '/media/data_cifs/clicktionary/webapp_data/nsf_images/'
-        imagenet_train_path = '/media/data_cifs/clicktionary/webapp_data/lmdb_trains/'
-        imagenet_validation_path = '/media/data_cifs/clicktionary/webapp_data/lmdb_validations/'
+    model_path = "/path/to/model_weigths"
+    imagenet_train_path = "/path/to/tserre_images"
+    # imagenet_train_path = '/media/data_cifs/clicktionary/webapp_data/lmdb_trains/'
+    imagenet_validation_path = '/media/data_cifs/clicktionary/webapp_data/lmdb_validations/'
+    # video_path
+    # winoground_path
+    training_map_path = "database_click_images"
+    training_image_path = "images"
+    click_map_predictions = "model_click_predictions"
+    im_ext = '.JPEG'
+    click_box_radius = 9
+    train_iters = 10000
+    val_iters = 100
+    nb_epoch = 1
+
 
     d = {
-    #Images for the click map prediction and folders for saving the predictions
-    'training_map_path' : 'database_click_images/',
-    'click_map_predictions' : 'model_click_predictions/',
-    'validation_image_path' : imagenet_validation_path,#'validation_images/', #Originally we just used these files
-    'training_image_path' : 'images/',
-    'im_ext' : '.JPEG',
-    'imagenet_train_path' : imagenet_train_path, #Now combine a subset of these, with a subset of validation_image_path, and the below 10 images
-    'mirc_image_path' : mirc_image_path,
-    'nsf_image_path' : nsf_image_path,
+        #Images for the click map prediction and folders for saving the predictions
+        'training_map_path' : training_map_path,
+        'click_map_predictions' : click_map_predictions,
+        'validation_image_path' : imagenet_validation_path,
+        'training_image_path' : training_image_path,
+        'im_ext' : im_ex,
+        'imagenet_train_path' : imagenet_train_path, #Now combine a subset of these, with a subset of validation_image_path, and the below 10 images
+        'mirc_image_path' : mirc_image_path,
+        'nsf_image_path' : nsf_image_path,
 
-    #Images for the click map prediction and folders for saving the predictions
-    'click_box_radius' : 9,
+        #Images for the click map prediction and folders for saving the predictions
+        'click_box_radius' : click_box_radius,
 
-    #For finetuning
-    'train_iters' : 10000, #not implemented yet
-    'val_iters' : 100, #not implemented yet
-    'nb_epoch' : 1,
+        #For finetuning
+        'train_iters' : train_iters, #not implemented yet
+        'val_iters' : val_iters, #not implemented yet
+        'nb_epoch' : nb_epoch,
 
-    #For finetuning the click predictor
-    'model_path' : model_path,
-    'model_init_training_weights' : model_path + 'models',
-    'model_checkpoints' : model_path + 'model_checkpoints',
+        #For finetuning the click predictor
+        'model_path' : model_path,
+        'model_init_training_weights' : os.path.join(model_path, 'models'),
+        'model_checkpoints' : os.path.join(model_path, 'model_checkpoints'),
 
-    #Paths for testing CNNs with attention maps
-    'tf_path' : tf_path,
-    'cnn_path' : tf_path + 'experiments/MIRC_webapp/',
-    'cnn_model_path' : tf_path + 'pretrained_weights/',
-    'cnn_architecture_path' : tf_path + 'model_depo/',
-    'part_syn_file_path' : tf_path + 'data/ilsvrc_2012/synset_names.txt',
-    'full_syn_file_path' : tf_path + 'data/ilsvrc_2012/synset.txt',
-    'cnn_models' : ['vgg16'],#['vgg16','vgg19'],
-    'cnn_types' : ['baseline','attention']
+        #Paths for testing CNNs with attention maps
+        'tf_path' : tf_path,
+        'cnn_path' : os.path.join(tf_path, 'experiments/MIRC_webapp/'),
+        'cnn_model_path' : os.path.join(tf_path, 'pretrained_weights/'),
+        'cnn_architecture_path' : os.path.join(tf_path, 'model_depo/'),
+        'part_syn_file_path' : os.path.join(tf_path, 'data/ilsvrc_2012/synset_names.txt'),
+        'full_syn_file_path' : os.path.join(tf_path, 'data/ilsvrc_2012/synset.txt'),
+        'cnn_models' : ['vgg16']
+        'cnn_types' : ['baseline', 'attention']
     }
     d = Map(d)
 

@@ -12,12 +12,14 @@ from data_proc_config import project_settings
 from glob import glob
 from scipy import misc
 
-def list_permutations(la,lb):
+
+def list_permutations(la, lb):
     perms = []
     for ii in la:
         for jj in lb:
             perms.append(ii + '_' + jj)
     return perms
+
 
 def update_database(cnn_name,acc,timestamp):
     if cnn_name == 'baseline_vgg16':
@@ -56,7 +58,6 @@ def main():
     attention_maps = sorted(glob(p.model_path + p.click_map_predictions + '*' + p.im_ext))
     ts = datetime.datetime.now()
     timestamp = str(ts.year) + '-' + str(ts.month) + '-' + str(ts.day)
-
 
     #Run each model
     for idx,prog in enumerate(programs):
