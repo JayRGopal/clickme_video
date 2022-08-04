@@ -80,13 +80,13 @@ def project_settings():
         'model_init_training_weights' : os.path.join(model_path, 'models'),
         'model_checkpoints' : os.path.join(model_path, 'model_checkpoints'),
 
-        #Paths for testing CNNs with attention maps
-        'tf_path' : tf_path,
-        'cnn_path' : os.path.join(tf_path, 'experiments/MIRC_webapp/'),
-        'cnn_model_path' : os.path.join(tf_path, 'pretrained_weights/'),
-        'cnn_architecture_path' : os.path.join(tf_path, 'model_depo/'),
-        'part_syn_file_path' : os.path.join(tf_path, 'data/ilsvrc_2012/synset_names.txt'),
-        'full_syn_file_path' : os.path.join(tf_path, 'data/ilsvrc_2012/synset.txt'),
+        # #Paths for testing CNNs with attention maps
+        # 'tf_path' : tf_path,
+        # 'cnn_path' : os.path.join(tf_path, 'experiments/MIRC_webapp/'),
+        # 'cnn_model_path' : os.path.join(tf_path, 'pretrained_weights/'),
+        # 'cnn_architecture_path' : os.path.join(tf_path, 'model_depo/'),
+        # 'part_syn_file_path' : os.path.join(tf_path, 'data/ilsvrc_2012/synset_names.txt'),
+        # 'full_syn_file_path' : os.path.join(tf_path, 'data/ilsvrc_2012/synset.txt'),
         'cnn_models' : ['vgg16'],
         'cnn_types' : ['baseline', 'attention']
     }
