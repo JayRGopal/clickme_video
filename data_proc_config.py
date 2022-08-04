@@ -87,7 +87,7 @@ def project_settings():
         'cnn_architecture_path' : os.path.join(tf_path, 'model_depo/'),
         'part_syn_file_path' : os.path.join(tf_path, 'data/ilsvrc_2012/synset_names.txt'),
         'full_syn_file_path' : os.path.join(tf_path, 'data/ilsvrc_2012/synset.txt'),
-        'cnn_models' : ['vgg16']
+        'cnn_models' : ['vgg16'],
         'cnn_types' : ['baseline', 'attention']
     }
     d = Map(d)
