@@ -62,7 +62,7 @@ def project_settings():
         'click_map_predictions' : click_map_predictions,
         'validation_image_path' : imagenet_validation_path,
         'training_image_path' : training_image_path,
-        'im_ext' : im_ex,
+        'im_ext' : im_ext,
         'imagenet_train_path' : imagenet_train_path, #Now combine a subset of these, with a subset of validation_image_path, and the below 10 images
         'mirc_image_path' : mirc_image_path,
         'nsf_image_path' : nsf_image_path,
