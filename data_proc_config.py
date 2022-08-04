@@ -47,6 +47,8 @@ def project_settings():
     training_map_path = "database_click_images"
     training_image_path = "images"
     click_map_predictions = "model_click_predictions"
+    mirc_image_path = "/"
+    nsf_image_path = "/"
     im_ext = '.JPEG'
     click_box_radius = 9
     train_iters = 10000
