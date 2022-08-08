@@ -7,13 +7,15 @@ from data_proc_config import project_settings
 
 
 def process_images(images, category_ims, mi, target_dir):
+    #import pdb;pdb.set_trace()
     im_name = re.split(os.path.sep, images[category_ims[mi]])[-1]
     try:
         image_id = labels[int(re.split('_',im_name)[0])] #FIX THIS... WORDS ARE GETTING TRUNCATED
+        #image_id = int(re.split('_',im_name)[0]) #FIX THIS... WORDS ARE GETTING TRUNCATED
     except:
         print("Failed to extract label from im_name using int(re.split('_',im_name)[0])")
-        import ipdb
-        ipdb.set_trace()
+        import pdb
+        pdb.set_trace()
     target_path = os.path.join(target_dir, im_name)
     shutil.copyfile(
         images[category_ims[mi]],
@@ -77,8 +79,8 @@ conn = psycopg2.connect(connection_string)
 cur = conn.cursor()
 
 # Grab an equal number of images from each category
-num_per_category = 4
-num_categories = 1000
+num_per_category = 1
+num_categories = 2
 generations_per_epoch = 4
 clear_previous = True  # Reset images table when you run this
 create_validation_set = False
@@ -86,10 +88,11 @@ create_validation_set = False
 # Pull all images with config.im_ext extension from im_dir
 images = glob(os.path.join(im_dir, '*{}'.format(config.im_ext)))
 
+
 # Get names of each file to compare to synset labels
 im_names = np.asarray(
     [re.split('_',re.split(os.path.sep,x)[-1])[0] for x in images])
-
+#import pdb;pdb.set_trace()
 im_categories = np.unique(im_names)
 selected_categories = np.copy(im_categories)
 np.random.shuffle(selected_categories)
@@ -104,7 +107,10 @@ if clear_previous:
 
 # First add in our randomly sampled images
 image_count = 0
+
+#pdb.set_trace()
 for cn in range(num_categories):
+    #import pdb;pdb.set_trace()
     category_ims = np.where(im_names == selected_categories[cn])[0]
     np.random.shuffle(category_ims)
     for mi in range(num_per_category):
@@ -114,6 +120,7 @@ for cn in range(num_categories):
             mi,
             target_dir)
         image_count += 1 #to ensure we are getting an accuracte count of images
+        #import pdb;pdb.set_trace()
         cur.execute(
             "INSERT INTO images (image_path, syn_name, generations) VALUES (%s,%s,%s)",
                 (target_path, image_id, 0)

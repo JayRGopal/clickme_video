@@ -39,7 +39,7 @@ def project_settings():
     node_name = os.uname()[1]  # If you want a machine-conditional path use this
 
     model_path = "/path/to/model_weigths"
-    imagenet_train_path = "/path/to/tserre_images"
+    imagenet_train_path = "tserre_images"
     # imagenet_train_path = '/media/data_cifs/clicktionary/webapp_data/lmdb_trains/'
     imagenet_validation_path = '/media/data_cifs/clicktionary/webapp_data/lmdb_validations/'
     # video_path
@@ -49,7 +49,7 @@ def project_settings():
     click_map_predictions = "model_click_predictions"
     mirc_image_path = "/"
     nsf_image_path = "/"
-    im_ext = '.JPEG'
+    im_ext = '.jpg'
     click_box_radius = 9
     train_iters = 10000
     val_iters = 100
