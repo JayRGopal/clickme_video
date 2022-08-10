@@ -21,11 +21,12 @@ try:
     print()
 except:
     pass
-  
-model = tf.keras.models.load_model('/Users/jaygopal/Desktop/ClickMe_Project/Models/saliency_volcanic_monkey.h5')
+
+model = tf.keras.models.load_model(os. getcwd() + '/Models/saliency_volcanic_monkey.h5')
 app = Flask(__name__)
+
   
-app.config['UPLOAD_FOLDER'] = '/Users/jaygopal/Desktop/ClickMe_Project/Website/uploaded/image'
+app.config['UPLOAD_FOLDER'] = '~/uploaded/image'
 
 def preprocess_harmonized(image, final_size=(224, 224)):
   ## image is (X, Y, 3).
