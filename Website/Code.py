@@ -43,6 +43,7 @@ def preprocess_harmonized(image, final_size=(224, 224)):
 
 def get_im(fpath):
     im = Image.open(fpath)
+    im = np.array(im, dtype=np.float32)
     if len(im.shape) == 2:
       im = im[..., None].repeat(3, -1)
     im = np.array(im, dtype=np.float32)
