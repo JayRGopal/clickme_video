@@ -60,7 +60,7 @@ mirc_dir = config.mirc_image_path  # 10 mirc images
 
 # Random sampling directories
 im_dir = config.imagenet_train_path
-target_dir = 'images'
+target_dir = 'tserre_images' #'images'
 validation_dir = 'validation_images' #only used if create_validation_set = True (vestige)
 
 if not os.path.exists(target_dir):
@@ -88,7 +88,7 @@ create_validation_set = False
 # Pull all images with config.im_ext extension from im_dir
 images = glob(os.path.join(im_dir, '*{}'.format(config.im_ext)))
 
-
+#import pdb;pdb.set_trace()
 # Get names of each file to compare to synset labels
 im_names = np.asarray(
     [re.split('_',re.split(os.path.sep,x)[-1])[0] for x in images])
@@ -102,7 +102,7 @@ selected_categories = selected_categories[:num_categories]
 if clear_previous:
     cur.execute("TRUNCATE TABLE images")
     for emptydir in [target_dir, validation_dir]:
-        for fn in glob(os.path.join(emptydir, '*.JPEG')):
+        for fn in glob(os.path.join(emptydir, '*.JPEG')):#return 
             os.remove(fn)
 
 # First add in our randomly sampled images

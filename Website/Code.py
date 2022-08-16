@@ -13,6 +13,7 @@ import math
 import gzip
 from keras.models import Model
 import csv
+import cv2
 
 try:
     import shutil
@@ -22,10 +23,10 @@ try:
 except:
     pass
   
-model = tf.keras.models.load_model('/Users/jaygopal/Desktop/ClickMe_Project/Models/saliency_volcanic_monkey.h5')
+model = tf.keras.models.load_model('saliency_volcanic_monkey.h5', compile = False)
 app = Flask(__name__)
   
-app.config['UPLOAD_FOLDER'] = '/Users/jaygopal/Desktop/ClickMe_Project/Website/uploaded/image'
+app.config['UPLOAD_FOLDER'] = './uploaded/image'
 
 def preprocess_harmonized(image, final_size=(224, 224)):
   ## image is (X, Y, 3).
@@ -38,13 +39,17 @@ def preprocess_harmonized(image, final_size=(224, 224)):
   image = tf.image.resize_with_crop_or_pad(image, final_size[0], final_size[1])
   #image = tf.image.resize(image, final_size, method='bilinear')
   image   = tf.cast(image, tf.float32)
+  print('preprocess')
 
   return image
 
 def get_im(fpath):
-    im = Image.open(fpath)
-    if len(im.shape) == 2:
-      im = im[..., None].repeat(3, -1)
+    # im = Image.open(fpath)
+    im = cv2.imread(fpath)
+
+    # Repeating the single channel of Grayscale 3 times
+    # if len(im.size) == 2:
+    #   im = im[..., None].repeat(3, -1)
     im = np.array(im, dtype=np.float32)
     return np.array(im, dtype=np.float32)
 
@@ -65,11 +70,14 @@ def finds(filepath):
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
+        print('a')
         f = request.files['file']
+        print('b')
         filename = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)) 
+        print('c')
         f.save(filename)
         val = finds(filename)
         return render_template('pred.html', ss = val)
   
 if __name__ == '__main__':
-    app.run()
+    app.run(debug = True)

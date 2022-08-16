@@ -49,7 +49,7 @@ def project_settings():
     click_map_predictions = "model_click_predictions"
     mirc_image_path = "/"
     nsf_image_path = "/"
-    im_ext = '.jpg'
+    im_ext = '.JPEG'
     click_box_radius = 9
     train_iters = 10000
     val_iters = 100
