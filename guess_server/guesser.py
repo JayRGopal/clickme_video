@@ -2,6 +2,7 @@
 # CNN and cached image holder answering guesses
 
 import os
+import cv2
 os.environ['CUDA_VISIBLE_DEVICES'] = '3' # Run only on GPU 0 to speed up init time
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
@@ -52,11 +53,14 @@ def get_image_prediction(guesser, image_name, clicks, click_size=21): # TODO: Us
     # Return prediction index
     # Load image into batch
     #import pdb;pdb.set_trace()
+    print("Image Name:", image_name)
     image = guesser.image_cache.load_image(image_name)
+    cv2.imwrite(image_name, image)
     # Transfer as clicks onto empty image
     guesser.input_batch[0, ...] = np.clip(image + np.random.normal(scale=0.4, size=image.shape) - 0.5, 0.0, 1.0)
     crop_offset = guesser.image_cache.crop_margin
     for click in clicks:
+        print("#Clicks:", click)
         y = int(round(click[1] - crop_offset[0]))
         x = int(round(click[0] - crop_offset[1]))
         y0 = max(y - click_size // 2, 0)
@@ -64,6 +68,7 @@ def get_image_prediction(guesser, image_name, clicks, click_size=21): # TODO: Us
         x0 = max(x - click_size // 2, 0)
         x1 = min(x + (click_size+1) // 2, guesser.batch_shape[2])
         guesser.input_batch[0, y0:y1, x0:x1, :] = image[y0:y1, x0:x1, :]
+    cv2.imshow(image)
     # Get probabilities
     #import pdb;pdb.set_trace()
     prob = guesser.session.run(guesser.prob, feed_dict=guesser.feed_dict)[0].squeeze()
@@ -73,6 +78,7 @@ def get_image_prediction(guesser, image_name, clicks, click_size=21): # TODO: Us
     # Resolve class to name
     prediction_name = guesser.class_names[class_index]
     #import pdb;pdb.set_trace()
+    print("Model Confidence:", prob[class_index])
     return prediction_name
 
 import re

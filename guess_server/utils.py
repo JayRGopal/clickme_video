@@ -45,8 +45,8 @@ class ImageCache:
        #     image = image.resize(self.input_size)
         # Crop
         #import pdb;pdb.set_trace()
-        image = np.resize(image, (224,224,3))
-        #image = image[int(self.crop_margin[0]):int(self.crop_margin[0]+self.crop_size[0]), int(self.crop_margin[1]):int(self.crop_margin[1]+self.crop_size[1]),:]
+        #image = np.resize(image, (224,224,3))
+        image = image[int(self.crop_margin[0]):int(self.crop_margin[0]+self.crop_size[0]), int(self.crop_margin[1]):int(self.crop_margin[1]+self.crop_size[1]),:]
         return image
 
     def get_image(self, filename):

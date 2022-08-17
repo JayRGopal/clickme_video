@@ -82,7 +82,7 @@ cur = conn.cursor()
 num_per_category = 1
 num_categories = 2
 generations_per_epoch = 4
-clear_previous = True  # Reset images table when you run this
+clear_previous = False #True  # Reset images table when you run this
 create_validation_set = False
 
 # Pull all images with config.im_ext extension from im_dir
