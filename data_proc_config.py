@@ -39,13 +39,13 @@ def project_settings():
     node_name = os.uname()[1]  # If you want a machine-conditional path use this
 
     model_path = "/path/to/model_weigths"
-    imagenet_train_path = "tserre_images"
+    imagenet_train_path = "images"
     # imagenet_train_path = '/media/data_cifs/clicktionary/webapp_data/lmdb_trains/'
     imagenet_validation_path = '/media/data_cifs/clicktionary/webapp_data/lmdb_validations/'
     # video_path
     # winoground_path
     training_map_path = "database_click_images"
-    training_image_path = "images"
+    training_image_path = "images" #"images"
     click_map_predictions = "model_click_predictions"
     mirc_image_path = "/"
     nsf_image_path = "/"

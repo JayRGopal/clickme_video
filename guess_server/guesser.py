@@ -3,6 +3,7 @@
 
 import os
 import cv2
+import keras
 os.environ['CUDA_VISIBLE_DEVICES'] = '3' # Run only on GPU 0 to speed up init time
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
@@ -12,6 +13,9 @@ import numpy as np
 from utils import ImageCache
 # from synset import get_synset
 
+from skimage import data, io
+from matplotlib import pyplot as plt
+
 def init_session():
     return tf.Session(config=tf.ConfigProto(gpu_options=(tf.GPUOptions(per_process_gpu_memory_fraction=0.95))))
 
@@ -19,7 +23,7 @@ def load_model_vgg16(batch_size):
     # Load a default vgg16
     image_shape = (224, 224, 3)
     #weight_path = os.path.join(pretrained_weights_path, 'vgg16.npy')
-    vgg = tf.keras.models.load_model('/home/jlcolin/Documents/dc_webapp/Website/saliency_volcanic_monkey.h5', compile = False)
+    vgg = tf.keras.models.load_model('/home/jlcolin/Documents/dc_webapp_old/Website/saliency_volcanic_monkey.h5', compile = False)
     #vgg = vgg16.Vgg16(vgg16_npy_path=weight_path)
     #import pdb;pdb.set_trace()
     input = tf.keras.Input(shape= image_shape, batch_size = batch_size,  dtype= tf.float32)  #tf.placeholder("float", (batch_size,) + image_shape)
@@ -31,7 +35,7 @@ def load_model_vgg16(batch_size):
 
 def load_guesser():
     # Init session, model and associated structures and return as one class object
-    dc_data_dir = '/home/jlcolin/Documents/dc_webapp/images'
+    dc_data_dir = '/home/jlcolin/Documents/dc_webapp_old/images'
     batch_size=1
     guesser = load_model_vgg16(batch_size=batch_size)
     # Load class names
@@ -55,12 +59,12 @@ def get_image_prediction(guesser, image_name, clicks, click_size=21): # TODO: Us
     #import pdb;pdb.set_trace()
     print("Image Name:", image_name)
     image = guesser.image_cache.load_image(image_name)
-    cv2.imwrite(image_name, image)
+    # cv2.imwrite(image_name, image)
     # Transfer as clicks onto empty image
     guesser.input_batch[0, ...] = np.clip(image + np.random.normal(scale=0.4, size=image.shape) - 0.5, 0.0, 1.0)
     crop_offset = guesser.image_cache.crop_margin
     for click in clicks:
-        print("#Clicks:", click)
+        # print("#Clicks:", click)
         y = int(round(click[1] - crop_offset[0]))
         x = int(round(click[0] - crop_offset[1]))
         y0 = max(y - click_size // 2, 0)
@@ -68,10 +72,21 @@ def get_image_prediction(guesser, image_name, clicks, click_size=21): # TODO: Us
         x0 = max(x - click_size // 2, 0)
         x1 = min(x + (click_size+1) // 2, guesser.batch_shape[2])
         guesser.input_batch[0, y0:y1, x0:x1, :] = image[y0:y1, x0:x1, :]
-    cv2.imshow(image)
+
+    # Display Images:
+    # io.imshow(guesser.input_batch[0])
+    # plt.show()
+
     # Get probabilities
     #import pdb;pdb.set_trace()
-    prob = guesser.session.run(guesser.prob, feed_dict=guesser.feed_dict)[0].squeeze()
+    # prob = guesser.session.run(guesser.input_batch, feed_dict=guesser.feed_dict)[0].squeeze()
+    keras.backend.set_session(guesser.session)
+    
+    #with guesser.session.as_default():
+    #        with guesser.session.graph.as_default():
+    prob = guesser.session.run(guesser.predict(tf.convert_to_tensor(guesser.input_batch), batch_size=1,verbose='auto',steps=1), feed_dict=guesser.feed_dict)[0].squeeze()
+                #guesser.predict(tf.convert_to_tensor(guesser.input_batch), batch_size=1,verbose='auto',steps=1)
+    print("Probability:", prob)
     #prob = guesser.session.run(guesser.predict, feed_dict=guesser.feed_dict)[0].squeeze()
     # Get class index
     class_index = np.argmax(prob)

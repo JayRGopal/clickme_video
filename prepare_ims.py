@@ -79,8 +79,8 @@ conn = psycopg2.connect(connection_string)
 cur = conn.cursor()
 
 # Grab an equal number of images from each category
-num_per_category = 1
-num_categories = 2
+num_per_category = 2
+num_categories = 1
 generations_per_epoch = 4
 clear_previous = False #True  # Reset images table when you run this
 create_validation_set = False
@@ -99,11 +99,11 @@ np.random.shuffle(selected_categories)
 selected_categories = selected_categories[:num_categories]
 
 # Clear previous images -- no reason to do this unless debugging
-if clear_previous:
-    cur.execute("TRUNCATE TABLE images")
-    for emptydir in [target_dir, validation_dir]:
-        for fn in glob(os.path.join(emptydir, '*.JPEG')):#return 
-            os.remove(fn)
+# if clear_previous:
+#     cur.execute("TRUNCATE TABLE images")
+#     for emptydir in [target_dir, validation_dir]:
+#         for fn in glob(os.path.join(emptydir, '*.JPEG')):#return 
+#             os.remove(fn)
 
 # First add in our randomly sampled images
 image_count = 0
