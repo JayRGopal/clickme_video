@@ -1,6 +1,8 @@
 node_modules/
 # credentials.py
-images
+Website/Models/*.h5
+Website/Models/saliency_volcanic_monkey.h5
+# images
 validation_images
 database_click_images
 *.pyc
