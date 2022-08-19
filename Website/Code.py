@@ -22,21 +22,15 @@ try:
     print()
 except:
     pass
-<<<<<<< HEAD
-  
-model = tf.keras.models.load_model('saliency_volcanic_monkey.h5', compile = False)
-=======
 
-model = tf.keras.models.load_model(os.getcwd() + '/Models/saliency_volcanic_monkey.h5')
->>>>>>> 05d251763552509d118f9f57e64dbc115f21f544
+model_path = os.getcwd() + '/Models/saliency_volcanic_monkey.h5'
+
+model = tf.keras.models.load_model(model_path)
 app = Flask(__name__)
 
-  
-<<<<<<< HEAD
-app.config['UPLOAD_FOLDER'] = './uploaded/image'
-=======
+
 app.config['UPLOAD_FOLDER'] = os.getcwd() + '/uploaded/image'
->>>>>>> 05d251763552509d118f9f57e64dbc115f21f544
+
 
 def preprocess_harmonized(image, final_size=(224, 224)):
   ## image is (X, Y, 3).
@@ -54,19 +48,11 @@ def preprocess_harmonized(image, final_size=(224, 224)):
   return image
 
 def get_im(fpath):
-<<<<<<< HEAD
-    # im = Image.open(fpath)
-    im = cv2.imread(fpath)
 
-    # Repeating the single channel of Grayscale 3 times
-    # if len(im.size) == 2:
-    #   im = im[..., None].repeat(3, -1)
-=======
     im = Image.open(fpath)
     im = np.array(im, dtype=np.float32)
     if len(im.shape) == 2:
       im = im[..., None].repeat(3, -1)
->>>>>>> 05d251763552509d118f9f57e64dbc115f21f544
     im = np.array(im, dtype=np.float32)
     return np.array(im, dtype=np.float32)
 
@@ -91,18 +77,13 @@ def upload_file():
     if request.method == 'POST':
         print('a')
         f = request.files['file']
-<<<<<<< HEAD
-        print('b')
-        filename = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)) 
-        print('c')
-=======
+
         frame = cv2.imdecode(np.frombuffer(f.read(), np.uint8), cv2.IMREAD_COLOR)
         frame = np.array(frame, dtype=np.float32)
         val = finds(frame)
 
         '''
         filename = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
->>>>>>> 05d251763552509d118f9f57e64dbc115f21f544
         f.save(filename)
         val = finds(filename)
         '''
@@ -110,9 +91,5 @@ def upload_file():
         return render_template('pred.html', ss = val)
   
 if __name__ == '__main__':
-<<<<<<< HEAD
-    app.run(debug = True)
-=======
     app.run()
 
->>>>>>> 05d251763552509d118f9f57e64dbc115f21f544
