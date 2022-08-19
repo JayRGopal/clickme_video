@@ -60,8 +60,8 @@ mirc_dir = config.mirc_image_path  # 10 mirc images
 
 # Random sampling directories
 im_dir = config.imagenet_train_path
-target_dir = 'tserre_images' #'images'
-validation_dir = 'validation_images' #only used if create_validation_set = True (vestige)
+target_dir = config.imagenet_train_path
+validation_dir = config.imagenet_validation_path  #only used if create_validation_set = True (vestige)
 
 if not os.path.exists(target_dir):
     os.makedirs(target_dir)
@@ -80,7 +80,7 @@ cur = conn.cursor()
 
 # Grab an equal number of images from each category
 num_per_category = 2
-num_categories = 1
+num_categories = 2
 generations_per_epoch = 4
 clear_previous = False #True  # Reset images table when you run this
 create_validation_set = False

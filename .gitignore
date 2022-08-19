@@ -1,8 +1,7 @@
 node_modules/
 # credentials.py
 Website/Models/*.h5
-Website/Models/saliency_volcanic_monkey.h5
-# images
+#images
 validation_images
 database_click_images
 *.pyc
@@ -10,3 +9,4 @@ credentials.pyc
 .idea
 *~
 lmdb_validations
+

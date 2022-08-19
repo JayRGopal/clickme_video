@@ -97,6 +97,8 @@ function getImage(ctx){
 function postImage(image_link,ctx){
     var image = new Image();
     image.src = 'data:image/jpg;base64,' + image_link;
+    //image.src = 'data:image/JPEG;base64,' + image_link;
+    
     try{
         ctx.drawImage(image,0,0);
     }catch(err){}

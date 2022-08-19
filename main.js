@@ -17,7 +17,7 @@ var errorFlag = argv.raven || argv.sentry || false;
 var isnum = /^\d+$/.test(port);
 if (!isnum) {
   console.log('Invalid port specified.'); // eslint-disable-line no-console
-  return;
+  //return;
 }
 var router = express.Router();
 
