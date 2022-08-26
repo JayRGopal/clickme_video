@@ -40,6 +40,7 @@ app.post('/guess', function(req,res) {
     var x = request(guess_server);
     req.pipe(x);
     x.pipe(res);
+    //console.log("x from main.js", x);
 });
 
 // use this for storing the hashed password in the session

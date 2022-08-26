@@ -155,7 +155,7 @@
                     <a class="nav-link" href="/about">Purpose</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="mailto:clicktionary.ai@gmail.com?Subject=ClickMe" target="_top">Contact us</a>
+                    <a class="nav-link" href="mailto:serrepsychophysics@brown.edu?Subject=ClickMe" target="_top">Contact us</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="scoreboard-modal" href="#">Scoreboard</a>
@@ -176,13 +176,16 @@
                             <p style="font-size:66%;color:white;">Click and then drag your mouse to reveal image parts that best describe a:</p>
                             <h2 class="lead" style="margin-top:-12px;margin-bottom:-10px;" id="image_label"></h2>
                         </p>
-                        <canvas id="myCanvas" width="256" height="256" style="z:10000;text-align:center;margin-bottom:15px;"></canvas>
+                        <!---<canvas id="myCanvas" width="256" height="256" style="z:10000;text-align:center;margin-bottom:15px;"></canvas> --->
+                        <canvas id="myCanvas" width="224" height="224" style="z:10000;text-align:center;margin-bottom:15px;"></canvas>
+                        
                         <p id='progressbar'></p>
                         <div class="row" style="color:white;margin-top:0px;"><p class="lead"><small id='ai_guess'>The AI thinks this is  likely a: </small></p></div>
                         <div class="row" style="color:white;margin-top:-18px;margin-bottom:-20px;height:10px;"><span><small style="font-size:70%;display:float;">But could also be:</small></span><span><ul style="font-size:60%;list-style-type:none;display: inline-block;"><li id="g2"></li><li id="g3"></li></ul></span><span><ul style="font-size:60%;list-style-type:none;display: inline-block;"><li id="g4"></li><li id="g5"></li></ul></span></div>
 			<br><br>
                         <button type="button" style="height:20px;font-size:66%" class="btn btn-secondary" id="skip_button" data-toggle="tooltip" data-placement="top" title="Careful, this may deduct points from your score."><b>Skip this image</b>: it has a strange label or poor quality.</button>
-                        <hr width="256px;"> 
+                        <!---<hr width="256px;"> --->
+                        <hr width="224px;">
                         <!--<p class="lead" style="color:white;">Status</p> -->
                         <p class="lead"><small id='click_count' style="color:white;">Your score: 0</small>&emsp;|&emsp;<small id='click_high_score' style="color:white;">Today's high score: 0</small>
                         <br>

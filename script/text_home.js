@@ -13,6 +13,10 @@ var clicks_till_update = 10; //Clicks between server calls
 var time_limit = 7000;
 var answer_status_timer = 500;
 var posx, posy, true_posx, true_posy, global_guess, global_width, global_height;
+var im_crop_width=224
+var im_crop_height=224
+var canvas_width=224
+var canvas_height=224
 
 //Background
 var colors = new Array(
@@ -89,11 +93,13 @@ function getImage(ctx){
       change_title(im_text);
       //
       global_image_link = split_data[1];
+      console.log(global_image_link);
       postImage(global_image_link,ctx);
       return;
     })
 }
-
+/*
+// OLD postImage function
 function postImage(image_link,ctx){
     var image = new Image();
     image.src = 'data:image/jpg;base64,' + image_link;
@@ -103,6 +109,22 @@ function postImage(image_link,ctx){
         ctx.drawImage(image,0,0);
     }catch(err){}
     
+}
+*/
+function postImage(image_link,ctx){
+    image = new Image();
+    imgLoaded = false;
+    image.src = 'data:image/JPEG;base64,' + image_link;
+    image.onload = function(){
+        ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+        
+        //ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+        imgLoaded = true;
+        draw_scored_box(0);
+    }
+    //try{
+    //    ctx.drawImage(image,0,0);
+    //}catch(err){}
 }
 
 function change_title(text){

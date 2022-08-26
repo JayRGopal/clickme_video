@@ -20,6 +20,10 @@ var remove_info_after = 3;
 var mobile = false;
 var previous_place = 100;
 var posx, posy, true_posx, true_posy, global_guess, global_width, global_height, imgLoaded,image;
+var im_crop_width=224
+var im_crop_height=224
+var canvas_width=224
+var canvas_height=224
 
 //Background
 var colors = new Array(
@@ -101,6 +105,7 @@ function getImage(ctx){
       change_title(im_text);
       //
       global_image_link = split_data[1];
+      console.log(global_image_link);
       postImage(global_image_link,ctx);
       return;
     })
@@ -109,9 +114,11 @@ function getImage(ctx){
 function postImage(image_link,ctx){
     image = new Image();
     imgLoaded = false;
-    image.src = 'data:image/jpg;base64,' + image_link;
+    image.src = 'data:image/JPEG;base64,' + image_link;
     image.onload = function(){
-        ctx.drawImage(image,0,0);
+        ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+        
+        //ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
         imgLoaded = true;
         draw_scored_box(0);
     }
@@ -211,7 +218,12 @@ function gate_coordinates(){
 }
 
 function fastDraw(){
-    if (imgLoaded) ctx.drawImage(image,0,0);
+    const im_w = image.width;
+    const im_h = image.height;
+    const sx_custom = (im_w - im_crop_width)/2
+    const sy_custom = (im_h - im_crop_height)/2
+    if (imgLoaded) ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    //if (imgLoaded) ctx.drawImage(image,0,0);
 }
 function draw(e) {
     //postImage(global_image_link,ctx)

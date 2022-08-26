@@ -1,6 +1,7 @@
 
 app.get('/',function(req,res){
-	res.sendFile('home.html',{'root': __dirname + '/templates'});
+	//console.log("res:", res)
+  res.sendFile('home.html',{'root': __dirname + '/templates'});
 })
 
 app.get('/about',function(req,res){
