@@ -302,7 +302,7 @@ function calc_dist(a,b){
     }
     return dist_array;
 }
-
+console.log("Example");
 function calculate_new_dist(old_x,old_y,new_x,new_y,old_dist,new_dist){
     if (old_dist > new_dist){
         new_x = new_x - old_x;
@@ -391,10 +391,10 @@ function package_json(click_array,global_label){
     return JSON.stringify(json_data);
 }
 
-function check_correct(split_guesses,im_text){
+function check_correct(split_guesses, im_text){
     var ci = -1;
     var answer = false;
-    for (var idx = 0; idx < 5;idx++){ //Top-5 recognition
+    for (var idx = 0; idx < 5; idx++){ //Top-5 recognition
         if (split_guesses[idx] === im_text){
             ci = idx;
             answer = true;
@@ -428,13 +428,17 @@ function call_sven(){
         //contentType: 'application/json',
         success: function (data) {
             var guess_pp = data.split('@');
-            var pps = str_to_float(guess_pp[1].split('!'));
-            var split_guesses = guess_pp[0].split('!'); //delimited with !
-            var cc = check_correct(split_guesses,im_text);
-            max_in = pps[find_target_pp(split_guesses,im_text)] * 100;
+            console.log("Inside sven:", guess_pp, im_text);
+            // var pps = str_to_float(guess_pp[1].split('!'));
+            // var split_guesses = guess_pp[0].split('!'); //delimited with !
+            var model_guess = guess_pp[0]
+            var pps = str_to_float(model_guess)
+            // var cc = check_correct(model_guess, im_text);
+            var cc = model_guess == im_text
+            max_in = pps[find_target_pp(model_guess,im_text)] * 100;
             var max_non = Math.max.apply(null,pps.splice(5,pps.length)) * 100;
             if (isNaN(max_in)) {max_in = 0;}
-            if (cc[1] === true){
+            if (cc === true){
                 //update_pps(ppChart,max_in,max_non);
                 //correct_recognition(0,max_in);
                 correct_recognition(0,(1 - bar.value()) * 100);

@@ -38,6 +38,7 @@ app.use('/web_content', express.static(__dirname + '/web_content'));
 
 app.post('/guess', function(req,res) {
     var x = request(guess_server);
+    // console.log("Requesting the Prediction from GuessServer. X:", x)
     req.pipe(x);
     x.pipe(res);
     //console.log("x from main.js", x);

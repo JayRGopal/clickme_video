@@ -60,7 +60,7 @@ def project_settings():
         #Images for the click map prediction and folders for saving the predictions
         'training_map_path' : training_map_path,
         'click_map_predictions' : click_map_predictions,
-        'validation_image_path' : imagenet_validation_path,
+        'imagenet_validation_path' : imagenet_validation_path,
         'training_image_path' : training_image_path,
         'im_ext' : im_ext,
         'imagenet_train_path' : imagenet_train_path, #Now combine a subset of these, with a subset of validation_image_path, and the below 10 images

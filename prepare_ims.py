@@ -17,9 +17,9 @@ def process_images(images, category_ims, mi, target_dir):
         import pdb
         pdb.set_trace()
     target_path = os.path.join(target_dir, im_name)
-    shutil.copyfile(
-        images[category_ims[mi]],
-        target_path)
+    # shutil.copyfile(
+    #     images[category_ims[mi]],
+    #     target_path)
     return target_path,image_id 
 
 

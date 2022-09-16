@@ -37,7 +37,7 @@ def guess_path(): # #
     # Get request data
    # import pdb;pdb.set_trace()
     rdata = json.loads(list(request.form.keys())[0])
-    print('Clicks on %s: %d' % (rdata['image_name'], len(rdata['click_array'])))
+    # print('Clicks on %s: %d' % (rdata['image_name'], len(rdata['click_array'])))
     # Get true label
     class_index = int(os.path.basename(rdata['image_name']).split('_')[0])
     print('True label: %s' % class_names[class_index])
@@ -49,17 +49,21 @@ def guess_path(): # #
         prediction = get_image_prediction(oracle, img_name_debug, rdata['click_array']) # rdata['image_name'], rdata['click_array'])
         #import pdb;pdb.set_trace()
     except:
-        print("Exception in user code:")
-        print('-'*60)
-        traceback.print_exc(file=sys.stdout)
-        print('-'*60)
-    print('...guess: {}'.format(prediction))#% prediction)
+        pass
+        # print("Exception in user code:")
+        # print('-'*60)
+        # traceback.print_exc(file=sys.stdout)
+        # print('-'*60)
+    print('GUESS: {}'.format(prediction))#% prediction)
     # Allow cross origin
     resp = Response(prediction)
+    if class_names[class_index] == prediction:
+        print("GUESSED CORRECTLY.")
     h = resp.headers
     h['Access-Control-Allow-Origin'] = '*'
     h['Access-Control-Allow-Methods'] = ['GET', 'POST', 'OPTIONS']
     h['Access-Control-Max-Age'] = '21600'
+    # print("Response:", resp.text)
     return resp
 
 # Start flask app
