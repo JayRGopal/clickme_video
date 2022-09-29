@@ -393,6 +393,7 @@
     var image = document.createElement('img');
     image.src = canvas.toDataURL('image/png');
     this._imageCache['' + imageSize] = image;
+    console.log(imageSize)
     return image;
   };
 

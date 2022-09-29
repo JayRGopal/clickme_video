@@ -95,6 +95,7 @@ function getImage(ctx){
 	var jqxhr = $.get('/random_image', function () {
 	        })
     .done(function(data) {
+    //   console.log("Data in getImage:", data)
       var split_data = data.split('imagestart');
       var label = split_data[0];
       var split_label = label.split('!')
@@ -105,7 +106,7 @@ function getImage(ctx){
       change_title(im_text);
       //
       global_image_link = split_data[1];
-      console.log(global_image_link);
+    //   console.log(global_image_link);
       postImage(global_image_link,ctx);
       return;
     })
@@ -116,9 +117,14 @@ function postImage(image_link,ctx){
     imgLoaded = false;
     image.src = 'data:image/JPEG;base64,' + image_link;
     image.onload = function(){
-        ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+
+        const im_w = image.width;
+        const im_h = image.height;
+        const sx_custom = (im_w - im_crop_width)/2
+        const sy_custom = (im_h - im_crop_height)/2
+        // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
         
-        //ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+        ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
         imgLoaded = true;
         draw_scored_box(0);
     }
@@ -391,17 +397,17 @@ function package_json(click_array,global_label){
     return JSON.stringify(json_data);
 }
 
-function check_correct(split_guesses, im_text){
-    var ci = -1;
-    var answer = false;
-    for (var idx = 0; idx < 5; idx++){ //Top-5 recognition
-        if (split_guesses[idx] === im_text){
-            ci = idx;
-            answer = true;
-        }
-    }
-    return [ci,answer];
-}
+// function check_correct(split_guesses, im_text){
+//     var ci = -1;
+//     var answer = false;
+//     for (var idx = 0; idx < 5; idx++){ //Top-5 recognition
+//         if (split_guesses[idx] === im_text){
+//             ci = idx;
+//             answer = true;
+//         }
+//     }
+//     return [ci,answer];
+// }
 
 function str_to_float(data){
    var out = [];
@@ -433,8 +439,7 @@ function call_sven(){
             // var split_guesses = guess_pp[0].split('!'); //delimited with !
             var model_guess = guess_pp[0]
             var pps = str_to_float(model_guess)
-            // var cc = check_correct(model_guess, im_text);
-            var cc = model_guess == im_text
+            var cc = (model_guess == im_text) // Comparing predicted label and true label
             max_in = pps[find_target_pp(model_guess,im_text)] * 100;
             var max_non = Math.max.apply(null,pps.splice(5,pps.length)) * 100;
             if (isNaN(max_in)) {max_in = 0;}
@@ -592,6 +597,7 @@ function upload_click_location(clicks,correct){
 }
 
 function start_turn(){
+    console.log("Start Turn:", ctx)
     getImage(ctx);
     setup_progressbar();
     if (mobile){
@@ -644,16 +650,23 @@ function update_user_data(){
                 }
             });
         }else{if (mobile && num_turns > 0){prepare_mobile();}}
+        console.log("Current Score:", user_data.score.toFixed(global_precision));
+        console.log("High Score:", user_data.scores.global_high_score.toFixed(global_precision))
         //if (user_data.email == ''){$('#instruction-modal').modal('show');}
+        if (user_data.score.toFixed(global_precision) > user_data.scores.global_high_score.toFixed(global_precision)) {
+            user_data.scores.global_high_score = user_data.score;
+        }
         $('#click_count').html('Your score: ' + user_data.score.toFixed(global_precision));
         $('#click_high_score').html('High score: ' + user_data.scores.global_high_score.toFixed(global_precision));
         if (mobile){$('#login_info').html('Username: ' + user_data.name);}else{
         $('#login_info').html('Your user name is: ' + user_data.name);}
         var accum_clicks = user_data.scores.clicks_to_go;
         var clicks_to_go = user_data.scores.click_goal - accum_clicks;
+        
         update_chart(myChart,accum_clicks,clicks_to_go);
         // High score table
         high_score_table = '';
+        console.log("User Data:", user_data)
         hsdata = user_data.scores.high_scores;
         var tt;
         for (var i = 0; i < hsdata.length; ++i)
