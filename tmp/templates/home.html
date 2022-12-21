@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no, height=device-height,width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- js links -->
+    <script src="../script/jquery-1.11.2.js" type="text/javascript"></script>
+    <script src="../script/home.js" type="text/javascript"></script>
+    <script src="../script/smoothscroll.js" type="text/javascript"></script>
+    <script src="../script/lockscroll.min.js" type="text/javascript"></script>
+    <!--<script src="../script/jquery.textillate.js" type="text/javascript"></script>
+    <script src="../script/jquery.fittext.js" type="text/javascript"></script>
+    <script src="../script/jquery.lettering.js" type="text/javascript"></script>-->
+    <script src="../script/pentagons.js" type="text/javascript"></script>
+
+    <!-- Style stuff and title -->
+    <title>CLICKME</title>
+    <link rel="icon" href="web_content/favicon.ico" />
+
+    <!-- Bootstrap core -->
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- Custom styles for this template -->
+    <link href="../style/cover.css" rel="stylesheet" />
+    <!--<link href="../style/Animate.css" rel="stylesheet" />-->
+
+  </head>
+
+  <body id="gradient">
+        <!-- Modals -->
+        <div id="scoreModal" class="modal fade">
+            <div class="modal-dialog" style="text-align:left">
+                <div class="modal-content">
+                    <div class="modal-header" style="text-align:center">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Highest-scoring players this month</h4>
+                        <dl id='scoreboard_time_1'>Amazon gift cards awarded to the top-5 ClickMe Players in the following amounts:</dl>
+                            <dt>1st place: $50</dt>
+                            <dt>2nd place: $40</dt>
+                            <dt>3rd place: $30</dt>
+                            <dt>4th place: $20</dt>
+                            <dt>5th place: $10</dt>
+                        </dl>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead><tr><th>Place</th><th>Name</th><th>Score</th></tr></thead>
+                            <tbody id="high_scores"></tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="text" id="update_email_text_modal" style="float:left;width:315px;" placeholder="Enter your email so we can reward you if you win.">
+                        <button type="button" id="update_email_modal" class="btn btn-primary" data-toggle="tooltip" data-placement="top" data-dismiss="modal" title="Click here to update your email address on file with what you type into the box on the left.">Update email address</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="instructionModal" class="modal fade">
+            <div class="modal-dialog" style="text-align:left">
+                <div class="modal-content">
+                    <div class="modal-header" style="text-align:center">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h2 class="modal-title">ClickMe instructions</h2>
+                    </div>
+                    <div class="modal-body" style="text-align:left;">
+                        <div class="legal well">
+                            <p>Welcome to ClickMe, where you and an artificial intelligence (AI) partner will play to win prizes and help us understand differences in how humans and machines see the world.</p>
+                            <p><strong>Goal: </strong>The goal of the game is to help your AI partner recognize as many object images as possible with as much confidence as possible.</p>
+                            <p><strong>Gameplay: </strong>You will help your partner recognize objects by revealing parts of images to it. This is done by "painting" over parts of the object image that help you recognize it. When you click on the image this begins your "brush stroke". After that you simply drag your cursor over the other parts of the image you think are important. These image parts will be revealed to your AI partner as you paint over them, who will try to guess the image only based off of those regions.</p> 
+                            <p><strong>Scoring: </strong>For every image that you and your partner answer correctly you will receive a score based on how quickly the AI recognizes the image. If the timer elapses before your partner answers correctly you will receive no points. You can skip images that are strange looking or do not match their label by clicking the "Skip this image" button.
+                            <p><strong>Prizes: </strong>We will reward the top-5 scoring participants. You are automatically assigned a username. Please enter your email in the Scoreboard tab so that we can reward you if you win.</p>
+			</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="consentModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" style="text-align:center;">We need your consent to use your data to develop better AI</h4>
+                    </div>
+                    <div class="modal-body" style="text-align:left">
+                        <div class="legal well">
+                            <p><strong> Purpose of the research: </strong> You are being asked to participate in a voluntary Brown University research study to measure human performance in visual recognition tasks. In this experiment, we seek to gain a basic understanding of how the visual system rapidly interprets and organizes visual scenes.
+
+                            <p><strong> Inclusion criteria: </strong> You must be 18 years or older to participate in this experiment. You must be a native English speaker.
+
+                            <p><strong> Behavioral Procedures: </strong> The task involves viewing images containing objects and clicking on parts of these objects that you think are important for recognizing them.
+
+                            <p><strong> Time required: </strong> There is no minimal time to play the game. You can stop playing whenever you would like. You can also continue playing for up to 10 hours.
+
+                            <p><strong> Benefits: </strong> There are no direct benefits for participating in this study. However, data from this study may improve our knowledge of the how the brain processes visual objects and scenes. The researchers intend to use data from this study for research projects that may appear in scientific conferences and journals.
+
+                            <p><strong> Compensation: </strong> By participating you will have the opportunity to win a gift card. Five gift cards will be drawn each month.
+
+                            <p><strong> Participant Risks: </strong> There are no anticipated risks for the participants in the current study.
+
+                            <p><strong> Confidentiality: </strong> Your participation in this study is confidential. By signing this document, you permit us to use anonymized information for scientific purposes including teaching and/or publication.
+
+                            <p><strong> Participation and Withdrawal: </strong> You do not have to participate, and you are free to withdraw at any time during the course of the study by closing the browser.
+
+                            <p> <strong> Contact: </strong> If you have questions or concerns about this research, please call (401) 863-1148 (or serrepsychophysics@brown.edu) and ask for Joe Johnson in regards to the following Project: "Towards a Human-level Neuromorphic Artificial Visual System; Sub-Study 1: Object recognition and categorical learning".</p>
+                                    If you have questions in regards to your rights as a participant, please contact Brown University’s Human Research Protection Program: <p style="text-align:center;"> 
+                                    <br>
+                                    Box 1986
+                                    <br>
+                                    Brown University
+                                    <br>
+                                    tel: (401) 863-3050
+                                    <br>
+                                    toll-free: (866) 309-2095
+                                    <br>
+                                    </p>
+                            By clicking 'I agree' below indicates that you have understood the information about the experiment and consent to your participation. The participation is voluntary and you may refuse to answer certain questions on the questionnaire and withdraw from the study at any time with no penalty. This does not waive your legal rights. You can print a copy of the consent form or save this browser window for your own record. If you have further questions related to this research, please contact the researchers.
+                            </p>
+
+                            <button type="button" class="btn btn-default btn-sm center-block" onClick="window.print();">
+                            <span class="glyphicon glyphicon-print"></span> Print a copy of this
+                            </button>
+                        </div>
+
+                        <hr>
+                        <h4 style="text-align:center;">Do you understand and consent to these terms?</h4>
+                    <!--</div>
+                    <div class="modal-footer">
+                        <input type="text" id="email" style="float:left;width:245px;" placeholder="Enter your email here before agreeing.">-->
+                        <div class="row" style="width:40%;margin: 0 auto;"><button type="button" id="agree" class="btn btn-success disabled" data-toggle="tooltip" data-placement="top" title="We need your email in order to contact you if you win a prize!">I agree</button>
+                        <button type="button" class="btn btn-danger" onclick="location.href='http://google.com';">Get me out of here!</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Score notification modal -->
+        <div id="placeModal" class="modal fade">
+            <div class="modal-dialog" style="text-align:center;top:25%;height:200px;">
+                <div class="modal-content">
+                    <div class="modal-body" id="place_notification_bg" style="text-align:center;background-color:green;color:white;">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h2>Congratulations!</h2><br><h2 id="place_notification_text" style="margin-top:-25px;">You are now in Nth place.</h2><br>
+                        <span id="place_notification_sup"><code>Go to the Scoreboard tab and enter your email address so we can reward you if you maintain your place in the top-5.</code></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main site content-->
+        <nav class="navbar navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" style="background-color:white;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="true" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar" style="background-color:black;"></span>
+                    <span class="icon-bar" style="background-color:black;"></span>
+                    <span class="icon-bar"  style="background-color:black;"></span>
+                </button>
+                <ul class="nav navbar-nav pull-left">
+                    <!-- <li class="nav-item" id="manbot"><a class="navbar-brand" style="font-size:200%; background-color: transparent;display:inline-block;" href="#"><span style="background-image: url(web_content/favicon.ico); background-position:left center; background-repeat: no-repeat; padding-left: 40px; padding-right:5px; padding-bottom:20px;"></span><span style="padding-top:20px;">  |  CLICKME</span></a></li> -->
+                    <li class="nav-item">
+                        <a class="navbar-brand" id="main_status" style="font-size:200%; background-color: transparent;display:inline-block;" href="#">CLICKME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="background-color: transparent;" id="login_info"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse collapse-in" aria-expanded="true">
+            <ul class="nav navbar-nav pull-right">
+                <!--<li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">Purpose</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="instruction-modal" href="#" target="_top">Instructions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="scoreboard-modal" href="#">Scoreboard</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <!-- Main area -->
+                    <div class="inner cover" style="margin-top:-30px;text-align:center;">
+                        <h2 class="lead" id="spammer" style="color:white;">Help the AI recognize this image before time runs out!</h2>
+                        <p style="font-size:66%;margin-top:-20px;color:white;" id="next_prize">The top-5 scoring players by --  win a gift-card! See the Scoreboard tab for details.</p>
+                        <hr width="50%" style="margin-top:-5px">
+                        <p class="lead">
+                            <p id="extra_info" style="font-size:66%;color:white;margin-top:-12px">Click and then brush with your mouse to reveal image parts best describing a:</p>
+                            <h2 class="lead" style="margin-top:-12px;margin-bottom:-10px;" id="image_label"></h2>
+                        </p>
+                        <!---<canvas id="myCanvas" width="256" height="256" style="z:10000;text-align:center;margin-bottom:15px;"></canvas>--->
+                        <canvas id="myCanvas" width="224" height="224" style="z:10000;text-align:center;margin-bottom:15px;"></canvas>
+                        <p style="margin-top:-20px;"><span style="color:white;font-size:50%;">100 pts </span><a id='progressbar' style="margin-top:-20px;"></a><span style="color:white;font-size:50%;"> 0 pts</span></p>
+                        <!--<canvas id="ppChart" style="margin-left:-50px; margin-top:-10px;" width="300" height="60"></canvas></p>-->
+                        <p id="text_feedback" style="color:white;margin-top:-15px;">_____</p>
+                        <button type="button" style="height:20px;font-size:66%;margin-top:0px;margin-bottom:5px;line-height:5px;" class="btn btn-secondary" id="skip_button" data-toggle="tooltip" data-placement="top" title="Careful, this may deduct points from your score."><b>Skip this image</b>: it has a strange label or poor quality.</button>
+                        <!---<hr width="256px;" style="margin-top:0px;"> --->
+                        <hr width="224px;" style="margin-top:0px;">
+                        <!--<p class="lead" style="color:white;">Status</p> -->
+                        <p class="lead" style="margin-top:-20px;"><small id='click_count' style="color:white;">Your score: 0</small>&emsp;|&emsp;<small id='click_high_score' style="color:white;">Today's high score: 0</small>
+                        <br>
+                        <em style="font-size:50%;">Number of images needed until we can improve this AI's recognition.</em><br>
+                        <canvas id="myChart" style="margin-left:-50px" width="300" height="60"></canvas></p>
+                    </div>
+            </div>
+        </div>
+
+      <!--</div>
+    </div>-->
+    <div id="image_id" style="display: none;"></div>
+    <!-- Footer script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <script src="../script/mirc_charts.js" type="text/javascript"></script> 
+    <script src="../script/progressbar.js" type="text/javascript"></script>
+  </body>
+
+</html>
