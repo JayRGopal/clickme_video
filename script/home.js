@@ -105,9 +105,11 @@ function getImage(ctx){
       //
       change_title(im_text);
       //
-      global_image_link = split_data[1];
+    //   global_image_link = split_data[1];
     //   console.log(global_image_link);
-      postImage(global_image_link,ctx);
+    //   postImage(global_image_link,ctx);
+    videolink = "../videos/Toilet.mp4";
+    postVideo(videolink, ctx);
       return;
     })
 }
@@ -127,6 +129,28 @@ function postImage(image_link,ctx){
         ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
         imgLoaded = true;
         draw_scored_box(0);
+    }
+    //try{
+    //    ctx.drawImage(image,0,0);
+    //}catch(err){}
+}
+
+function postVideo(image_link,ctx){
+    image = new Image();
+    imgLoaded = false;
+    image.src = 'data:image/JPEG;base64,' + image_link;
+    image.onload = function(){
+
+        const im_w = image.width;
+        const im_h = image.height;
+        const sx_custom = (im_w - im_crop_width)/2
+        const sy_custom = (im_h - im_crop_height)/2
+        // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+        
+        ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+        imgLoaded = true;
+        draw_scored_box(0);
+        image.play();
     }
     //try{
     //    ctx.drawImage(image,0,0);

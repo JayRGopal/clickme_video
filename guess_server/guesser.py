@@ -2,7 +2,7 @@
 # CNN and cached image holder answering guesses
 
 import os
-import cv2
+# import cv2
 from PIL import Image
 import keras
 os.environ['CUDA_VISIBLE_DEVICES'] = '3' # Run only on GPU 0 to speed up init time
