@@ -17,7 +17,7 @@ It is recommended that you do this in either a screen or tmux window so that the
 	cd clickme_video/
 	npm install
 
-Note: if using axdfrnaconda, you may need to use the following commands:
+Note: if using anaconda, you may need to use the following commands:
 * ```conda install nomkl numpy scipy scikit-learn numexpr```
 * ```conda remove mkl mkl-service```
 
