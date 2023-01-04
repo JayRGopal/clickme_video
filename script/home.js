@@ -111,6 +111,7 @@ function getImage(ctx){
     //   console.log(global_image_link);
     //   postImage(global_image_link,ctx);
     videolink = "videos/Toilet.mp4";
+    console.log('test now')
     postVideo(videolink, ctx);
       return;
     })
