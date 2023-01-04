@@ -90,14 +90,7 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
   }
 }
 
-var our_src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
 
-function loaded () {
-    // For video loading
-
-document.getElementById("video").src = our_src;
-
-}
 
 // Main content
 function getImage(ctx){
@@ -147,7 +140,8 @@ function postImage(image_link,ctx){
 function postVideo(image_link,ctx){
     var video = document.createElement("video");
     vidLoaded = false;
-    video.src = 'data:video/mp4;base64,' + image_link;
+    //video.src = 'data:video/mp4;base64,' + image_link;
+    video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
     video.onload = function(){
 
         const vid_w = video.videoWidth;
@@ -167,9 +161,6 @@ function postVideo(image_link,ctx){
             }
             if(frame>((endLength*fps) - 1)){
                 video.pause();
-            our_src = "https://upload.wikimedia.org/wikipedia/commons/e/eb/Het_gevarieerde_wagenpark_Weeknummer_64-16_-_Open_Beelden_-_54313.ogv";
-            frame = 0;
-            loaded();
             }
         })();
         ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
