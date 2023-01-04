@@ -90,6 +90,15 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
   }
 }
 
+var our_src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
+
+function loaded () {
+    // For video loading
+
+document.getElementById("video").src = our_src;
+
+}
+
 // Main content
 function getImage(ctx){
 	var jqxhr = $.get('/random_image', function () {
@@ -108,7 +117,7 @@ function getImage(ctx){
     //   global_image_link = split_data[1];
     //   console.log(global_image_link);
     //   postImage(global_image_link,ctx);
-    videolink = "../videos/Toilet.mp4";
+    videolink = "videos/Toilet.mp4";
     postVideo(videolink, ctx);
       return;
     })
@@ -136,19 +145,35 @@ function postImage(image_link,ctx){
 }
 
 function postVideo(image_link,ctx){
-    image = new Image();
-    imgLoaded = false;
-    image.src = 'data:image/JPEG;base64,' + image_link;
-    image.onload = function(){
+    var video = document.createElement("video");
+    vidLoaded = false;
+    video.src = 'data:video/mp4;base64,' + image_link;
+    video.onload = function(){
 
-        const im_w = image.width;
-        const im_h = image.height;
-        const sx_custom = (im_w - im_crop_width)/2
-        const sy_custom = (im_h - im_crop_height)/2
+        const vid_w = video.videoWidth;
+        const vid_h = video.videoHeight;
+        const sx_custom = (vid_w - im_crop_width)/2
+        const sy_custom = (vid_h - im_crop_height)/2
         // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-        
+        var $this = this; //cache
+        var frame = 0;
+        (function loop() {
+            var fps = 60;
+            var endLength = 5; // in seconds
+            if (!$this.ended && frame<(endLength*fps)) {
+                ctx.drawImage($this, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+                frame = frame + 1;
+                setTimeout(loop, 1000 / fps); // drawing at specific fps
+            }
+            if(frame>((endLength*fps) - 1)){
+                video.pause();
+            our_src = "https://upload.wikimedia.org/wikipedia/commons/e/eb/Het_gevarieerde_wagenpark_Weeknummer_64-16_-_Open_Beelden_-_54313.ogv";
+            frame = 0;
+            loaded();
+            }
+        })();
         ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-        imgLoaded = true;
+        vidLoaded = true;
         draw_scored_box(0);
         image.play();
     }
