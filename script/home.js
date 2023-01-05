@@ -158,8 +158,8 @@ function postVideo(image_link,ctx){
         var frame = 0;
         const vid_w = $this.videoWidth;
         const vid_h = $this.videoHeight;
-        const sx_custom = (vid_w - im_crop_width)/2
-        const sy_custom = (vid_h - im_crop_height)/2
+        const sx_custom = (vid_w - im_crop_width)/2;
+        const sy_custom = (vid_h - im_crop_height)/2;
         (function loop() {
           //if (!$this.paused && !$this.ended) {
           var fps = 60;
