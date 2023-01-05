@@ -142,7 +142,7 @@ function postImage(image_link,ctx){
 function loaded () {
 
     //document.getElementById("video").src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
-    document.getElementById("video").src = 'data:video/mp4;base64,' + "videos/Toilet.mp4"; 
+    document.getElementById("video").src = "/home/jay_gopal_brown_edu/clickme_video/videos/Toilet.mp4"; 
 }
     
 
