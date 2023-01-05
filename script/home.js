@@ -173,6 +173,7 @@ function postVideo(image_link,ctx){
             video.pause();
           }
         })();
+        image = $this;
       }, 0);
 
     video.onload = function(){
