@@ -94,26 +94,28 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
 
 // Main content
 function getImage(ctx){
-	var jqxhr = $.get('/random_image', function () {
-	        })
-    .done(function(data) {
-    //   console.log("Data in getImage:", data)
-      var split_data = data.split('imagestart');
-      var label = split_data[0];
-      var split_label = label.split('!')
-      //
-      global_label = split_label[0];
-      im_text = split_label[1].trimLeft(1); //we are wandering into a space at the start of labels at some point in the pipeline :(
-      //
-      change_title(im_text);
-      //
-    //   global_image_link = split_data[1];
-    //   console.log(global_image_link);
-    //   postImage(global_image_link,ctx);
+	// var jqxhr = $.get('/random_image', function () {
+	//         })
+    // .done(function(data) {
+    // //   console.log("Data in getImage:", data)
+    //   var split_data = data.split('imagestart');
+    //   var label = split_data[0];
+    //   var split_label = label.split('!')
+    //   //
+    //   global_label = split_label[0];
+    //   im_text = split_label[1].trimLeft(1); //we are wandering into a space at the start of labels at some point in the pipeline :(
+    //   //
+    //   change_title(im_text);
+    //   //
+    // //   global_image_link = split_data[1];
+    // //   console.log(global_image_link);
+    // //   postImage(global_image_link,ctx);
+    // videolink = "videos/Toilet.mp4";
+    // postVideo(videolink, ctx);
+    //   return;
+    // })
     videolink = "videos/Toilet.mp4";
     postVideo(videolink, ctx);
-      return;
-    })
 }
 
 function postImage(image_link,ctx){
