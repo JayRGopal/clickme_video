@@ -114,7 +114,7 @@ function getImage(ctx){
     // postVideo(videolink, ctx);
     //   return;
     // })
-    videolink = "../videos/Toilet.mp4";
+    videolink = "/home/jay_gopal_brown_edu/clickme_video/videos/Toilet.mp4";
     postVideo(videolink, ctx);
 }
 
