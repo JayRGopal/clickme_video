@@ -111,7 +111,6 @@ function getImage(ctx){
     //   console.log(global_image_link);
     //   postImage(global_image_link,ctx);
     videolink = "videos/Toilet.mp4";
-    console.log('test now')
     postVideo(videolink, ctx);
       return;
     })
@@ -157,6 +156,7 @@ function postVideo(image_link,ctx){
             var endLength = 5; // in seconds
             if (!$this.ended && frame<(endLength*fps)) {
                 ctx.drawImage($this, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+                console.log('testing within video frame change')
                 frame = frame + 1;
                 setTimeout(loop, 1000 / fps); // drawing at specific fps
             }
