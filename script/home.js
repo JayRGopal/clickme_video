@@ -165,7 +165,7 @@ function postVideo(image_link,ctx){
           var fps = 60;
           var endLength = 5;
           if (!$this.ended && frame<(endLength*fps)) {
-            ctx.drawImage($this, 0, 0, vid_w, vid_h);
+            ctx.drawImage($this, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
             frame = frame + 1;
             setTimeout(loop, 1000 / fps); // drawing at 60 fps
           }
