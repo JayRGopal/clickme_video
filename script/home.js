@@ -145,6 +145,7 @@ function postVideo(image_link,ctx){
     //video.src = 'data:video/mp4;base64,' + image_link;
     video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
     console.log('testing within postVideo')
+    video.load();
     video.onload = function(){
         console.log('testing within video onload')
         const vid_w = video.videoWidth;
