@@ -114,7 +114,7 @@ function getImage(ctx){
     // postVideo(videolink, ctx);
     //   return;
     // })
-    videolink = "videos/Toilet.mp4";
+    videolink = "../videos/Toilet.mp4";
     postVideo(videolink, ctx);
 }
 
