@@ -156,12 +156,16 @@ function postVideo(image_link,ctx){
     video.addEventListener('play', function() {
         var $this = this; //cache
         var frame = 0;
+        const vid_w = $this.videoWidth;
+        const vid_h = $this.videoHeight;
+        const sx_custom = (vid_w - im_crop_width)/2
+        const sy_custom = (vid_h - im_crop_height)/2
         (function loop() {
           //if (!$this.paused && !$this.ended) {
           var fps = 60;
           var endLength = 5;
           if (!$this.ended && frame<(endLength*fps)) {
-            ctx.drawImage($this, 0, 0, $this.videoWidth, $this.videoHeight);
+            ctx.drawImage($this, 0, 0, vid_w, vid_h);
             frame = frame + 1;
             setTimeout(loop, 1000 / fps); // drawing at 60 fps
           }
