@@ -150,10 +150,10 @@ function postVideo(image_link,ctx){
     var video = document.getElementById("video");
     this.video = video;
     vidLoaded = false;
-    video.src = image_link;
+    //video.src = image_link;
     //video.src = 'data:video/mp4;base64,' + image_link;
-    //video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
-    video.src = 'https://upload.wikimedia.org/wikipedia/commons/0/09/Traffic_on_Tower_Bridge.webm';
+    video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
+    //video.src = 'https://upload.wikimedia.org/wikipedia/commons/0/09/Traffic_on_Tower_Bridge.webm';
     console.log('in postVideo');
     video.addEventListener('play', function() {
         console.log('in video listener');
