@@ -140,12 +140,30 @@ function postImage(image_link,ctx){
 }
 
 function postVideo(image_link,ctx){
-    var video = document.createElement("video");
+    var video = document.getElementById("video");
+    this.video = video;
     vidLoaded = false;
     //video.src = 'data:video/mp4;base64,' + image_link;
     video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
-    console.log('testing within postVideo')
-    video.load();
+    
+    video.addEventListener('play', function() {
+        var $this = this; //cache
+        var frame = 0;
+        (function loop() {
+          //if (!$this.paused && !$this.ended) {
+          var fps = 60;
+          var endLength = 5;
+          if (!$this.ended && frame<(endLength*fps)) {
+            ctx.drawImage($this, 0, 0, $this.videoWidth, $this.videoHeight);
+            frame = frame + 1;
+            setTimeout(loop, 1000 / fps); // drawing at 60 fps
+          }
+          if(frame>((endLength*fps) - 1)){
+            video.pause();
+          }
+        })();
+      }, 0);
+
     video.onload = function(){
         console.log('testing within video onload')
         const vid_w = video.videoWidth;
