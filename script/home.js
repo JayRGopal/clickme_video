@@ -114,7 +114,7 @@ function getImage(ctx){
     // postVideo(videolink, ctx);
     //   return;
     // })
-    videolink = "../videos/Toilet.mp4";
+    videolink = "../videos/Toilet_trimmed.mp4";
     postVideo(videolink, ctx);
 }
 
@@ -166,7 +166,7 @@ function postVideo(video_link,ctx){
     imgLoaded = false;
     var sourceMP4 = document.createElement("source"); 
     sourceMP4.type = "video/mp4";
-    sourceMP4.src = "../videos/Toilet.mp4";
+    sourceMP4.src = video_link;
     video.appendChild(sourceMP4);
     this.video = video;
     //video.src = video_link;
