@@ -140,15 +140,15 @@ function postImage(image_link,ctx){
 }
 
 
-function postVideo(image_link,ctx){
+function postVideo(video_link,ctx){
     var video = document.getElementById("video");
     this.video = video;
     vidLoaded = false;
     imgLoaded = false;
-    //video.src = image_link;
+    //video.src = video_link;
     //video.src = "../videos/Toilet.mp4";
     //video.type = "video/mp4";
-    //video.src = 'data:video/mp4;base64,' + image_link;
+    //video.src = 'data:video/mp4;base64,' + video_link;
     video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
     //video.src = 'https://upload.wikimedia.org/wikipedia/commons/0/09/Traffic_on_Tower_Bridge.webm';
     //video.src = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4';
@@ -645,18 +645,20 @@ function revert_title(){
 }
 
 function clicked(e) {
-    if (posx < 0 || posx > global_width || posy < 0 || posy > global_height){}
-    else{
-        if (click_array.length === 0){
-            if (mobile){freeze();
-               var pos = process_touch_coordinates(e);
-               posx = pos[0];
-               posy = pos[1];
-            }            
-            click_functions(posx,posy);
-            playing_image = true;
-            keep_clicking();
-            bar.animate(1.0,{duration:time_limit},function(){time_elapsed();});
+    if (imgLoaded) {
+        if (posx < 0 || posx > global_width || posy < 0 || posy > global_height){}
+        else{
+            if (click_array.length === 0){
+                if (mobile){freeze();
+                var pos = process_touch_coordinates(e);
+                posx = pos[0];
+                posy = pos[1];
+                }            
+                click_functions(posx,posy);
+                playing_image = true;
+                keep_clicking();
+                bar.animate(1.0,{duration:time_limit},function(){time_elapsed();});
+            }
         }
     }
 }
