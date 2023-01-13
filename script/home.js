@@ -175,9 +175,11 @@ function postVideo(video_link,ctx){
           //if(frame>((endLength*fps) - 1)){
           else{
             video.pause();
+            console.log('video pause statement')
             return;
           }
         })();
+        console.log('calling postImage')
         image = $this;
         postImage(image,ctx)
     }, 0);
