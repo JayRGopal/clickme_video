@@ -131,7 +131,7 @@ function postImage(image_link,ctx){
     const sy_custom = (im_h - im_crop_height)/2
     // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
     
-    ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
     imgLoaded = true;
     draw_scored_box(0);
     // image.onload = function(){
