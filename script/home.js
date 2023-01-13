@@ -144,6 +144,7 @@ function postVideo(image_link,ctx){
     var video = document.getElementById("video");
     this.video = video;
     vidLoaded = false;
+    imgLoaded = false;
     //video.src = image_link;
     //video.src = "../videos/Toilet.mp4";
     //video.type = "video/mp4";
@@ -176,6 +177,7 @@ function postVideo(image_link,ctx){
           }
         })();
         image = $this;
+        imgLoaded = true;
     }, 0);
 
     video.onload = function(){
