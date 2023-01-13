@@ -323,10 +323,12 @@ function draw(e) {
     posx = pos[0];
     posy = pos[1];
     var rgb = hexToRgb(global_color)
-    draw_boxes(rgb,click_array);
-    if (click_array.length == 0){
-        ctx.fillStyle = 'rgba(' + rgb['r'] + ',' +rgb['g'] + ',' + rgb['b'] + ',' + '0.6)';
-        ctx.fillRect(posx-half_size, posy-half_size, reveal_size, reveal_size);
+    if (imgLoaded){
+        draw_boxes(rgb,click_array);
+        if (click_array.length == 0){
+            ctx.fillStyle = 'rgba(' + rgb['r'] + ',' +rgb['g'] + ',' + rgb['b'] + ',' + '0.6)';
+            ctx.fillRect(posx-half_size, posy-half_size, reveal_size, reveal_size);
+        }
     }
 }
 
@@ -339,7 +341,9 @@ function draw_touch(e) {
     posx = pos[0];
     posy = pos[1];
     var rgb = hexToRgb(global_color)
-    draw_boxes(rgb,click_array);
+    if (imgLoaded){
+        draw_boxes(rgb,click_array);
+    }
 }
 
 function sum(array) {
