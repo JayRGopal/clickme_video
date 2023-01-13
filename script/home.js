@@ -677,19 +677,23 @@ function start_turn(){
     console.log("Start Turn:", ctx)
     getImage(ctx);
     setup_progressbar();
-    if (mobile){
-        canvas.addEventListener('touchmove', draw_touch, false);
-        canvas.addEventListener('touchstart', clicked, false);
-    }else{
-        canvas.addEventListener('mousemove', draw, false);
-        canvas.addEventListener('mousedown', clicked, false);
-    }
-    if (num_turns > remove_info_after){
-        if (mobile){}else{
-            $('#next_prize').fadeOut();
+    var delayInMilliseconds = 5000; //5 seconds
+    setTimeout(function() {
+        if (mobile){
+            canvas.addEventListener('touchmove', draw_touch, false);
+            canvas.addEventListener('touchstart', clicked, false);
+        }else{
+            canvas.addEventListener('mousemove', draw, false);
+            canvas.addEventListener('mousedown', clicked, false);
         }
-        $('#extra_info').fadeOut();
-    }
+        if (num_turns > remove_info_after){
+            if (mobile){}else{
+                $('#next_prize').fadeOut();
+            }
+            $('#extra_info').fadeOut();
+        }
+    }, delayInMilliseconds);
+      
 }
 
 function prepare_mobile(){
