@@ -177,36 +177,36 @@ function postVideo(image_link,ctx){
           }
         })();
         image = $this;
-        postImage(image, ctx);
+        postImage(image,ctx)
     }, 0);
 
-    video.onload = function(){
-        console.log('testing within video onload')
-        const vid_w = video.videoWidth;
-        const vid_h = video.videoHeight;
-        const sx_custom = (vid_w - im_crop_width)/2
-        const sy_custom = (vid_h - im_crop_height)/2
-        // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-        var $this = this; //cache
-        var frame = 0;
-        (function loop() {
-            var fps = 60;
-            var endLength = 5; // in seconds
-            if (!$this.ended && frame<(endLength*fps)) {
-                ctx.drawImage($this, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-                console.log('testing within video frame change')
-                frame = frame + 1;
-                setTimeout(loop, 1000 / fps); // drawing at specific fps
-            }
-            if(frame>((endLength*fps) - 1)){
-                video.pause();
-            }
-        })();
-        ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-        vidLoaded = true;
-        draw_scored_box(0);
-        image.play();
-    }
+    // video.onload = function(){
+    //     console.log('testing within video onload')
+    //     const vid_w = video.videoWidth;
+    //     const vid_h = video.videoHeight;
+    //     const sx_custom = (vid_w - im_crop_width)/2
+    //     const sy_custom = (vid_h - im_crop_height)/2
+    //     // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    //     var $this = this; //cache
+    //     var frame = 0;
+    //     (function loop() {
+    //         var fps = 60;
+    //         var endLength = 5; // in seconds
+    //         if (!$this.ended && frame<(endLength*fps)) {
+    //             ctx.drawImage($this, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    //             console.log('testing within video frame change')
+    //             frame = frame + 1;
+    //             setTimeout(loop, 1000 / fps); // drawing at specific fps
+    //         }
+    //         if(frame>((endLength*fps) - 1)){
+    //             video.pause();
+    //         }
+    //     })();
+    //     ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    //     vidLoaded = true;
+    //     draw_scored_box(0);
+    //     image.play();
+    // }
     //try{
     //    ctx.drawImage(image,0,0);
     //}catch(err){}
