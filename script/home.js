@@ -155,7 +155,12 @@ function postImage(image_link,ctx){
 
 
 function postVideo(video_link,ctx){
-    var video = document.getElementById("video");
+    //var video = document.getElementById("video");
+    const video = document.createElement('video');
+    video.controls = false;
+    video.muted = false;
+    video.height = canvas_width;
+    video.width = canvas_height;
     this.video = video;
     vidLoaded = false;
     imgLoaded = false;
