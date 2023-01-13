@@ -156,14 +156,19 @@ function postImage(image_link,ctx){
 
 function postVideo(video_link,ctx){
     //var video = document.getElementById("video");
-    const video = document.createElement('video');
+    var video = document.createElement('video');
     video.controls = false;
     video.muted = false;
     video.height = canvas_width;
     video.width = canvas_height;
-    this.video = video;
+    video.autoplay = true;
     vidLoaded = false;
     imgLoaded = false;
+    var sourceMP4 = document.createElement("source"); 
+    sourceMP4.type = "video/mp4";
+    sourceMP4.src = "../videos/Toilet.mp4";
+    video.appendChild(sourceMP4);
+    this.video = video;
     //video.src = video_link;
     //video.src = "../videos/Toilet.mp4";
     //video.type = "video/mp4";
