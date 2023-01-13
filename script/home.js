@@ -177,7 +177,7 @@ function postVideo(image_link,ctx){
           }
         })();
         image = $this;
-        imgLoaded = true;
+        postImage(image, ctx);
     }, 0);
 
     video.onload = function(){
