@@ -72,9 +72,9 @@
                     <div class="modal-body" style="text-align:left;">
                         <div class="legal well">
                             <p>Welcome to ClickMe, where you and an artificial intelligence (AI) partner will play to win prizes and help us understand differences in how humans and machines see the world.</p>
-                            <p><strong>Goal: </strong>The goal of the game is to help your AI partner recognize as many object images as possible with as much confidence as possible.</p>
-                            <p><strong>Gameplay: </strong>You will help your partner recognize objects by revealing parts of images to it. This is done by "painting" over parts of the object image that help you recognize it. When you click on the image this begins your "brush stroke". After that you simply drag your cursor over the other parts of the image you think are important. These image parts will be revealed to your AI partner as you paint over them, who will try to guess the image only based off of those regions.</p> 
-                            <p><strong>Scoring: </strong>For every image that you and your partner answer correctly you will receive a score based on how quickly the AI recognizes the image. If the timer elapses before your partner answers correctly you will receive no points. You can skip images that are strange looking or do not match their label by clicking the "Skip this image" button.
+                            <p><strong>Goal: </strong>The goal of the game is to help your AI partner recognize as many object videos as possible with as much confidence as possible.</p>
+                            <p><strong>Gameplay: </strong>You will help your partner recognize objects by revealing parts of videos to it. This is done by "painting" over parts of the object video that help you recognize it. When you click on the video this begins your "brush stroke". After that you simply drag your cursor over the other parts of the video frame you think are important. These video parts will be revealed to your AI partner as you paint over them, who will try to guess the video only based off of those regions.</p> 
+                            <p><strong>Scoring: </strong>For every video that you and your partner answer correctly you will receive a score based on how quickly the AI recognizes the video. If the timer elapses before your partner answers correctly you will receive no points. You can skip videos that are strange looking or do not match their label by clicking the "Skip this video" button.
                             <p><strong>Prizes: </strong>We will reward the top-5 scoring participants. You are automatically assigned a username. Please enter your email in the Scoreboard tab so that we can reward you if you win.</p>
 			</div>
                     </div>
@@ -97,7 +97,7 @@
 
                             <p><strong> Inclusion criteria: </strong> You must be 18 years or older to participate in this experiment. You must be a native English speaker.
 
-                            <p><strong> Behavioral Procedures: </strong> The task involves viewing images containing objects and clicking on parts of these objects that you think are important for recognizing them.
+                            <p><strong> Behavioral Procedures: </strong> The task involves viewing videos containing objects and clicking on parts of these objects that you think are important for recognizing them.
 
                             <p><strong> Time required: </strong> There is no minimal time to play the game. You can stop playing whenever you would like. You can also continue playing for up to 10 hours.
 
@@ -198,11 +198,11 @@
             <div class="row">
                 <!-- Main area -->
                     <div class="inner cover" style="margin-top:-30px;text-align:center;">
-                        <h2 class="lead" id="spammer" style="color:white;">Help the AI recognize this image before time runs out!</h2>
+                        <h2 class="lead" id="spammer" style="color:white;">Help the AI recognize this video before time runs out!</h2>
                         <p style="font-size:66%;margin-top:-20px;color:white;" id="next_prize">The top-5 scoring players by --  win a gift-card! See the Scoreboard tab for details.</p>
                         <hr width="50%" style="margin-top:-5px">
                         <p class="lead">
-                            <p id="extra_info" style="font-size:66%;color:white;margin-top:-12px">Click and then brush with your mouse to reveal image parts best describing a:</p>
+                            <p id="extra_info" style="font-size:66%;color:white;margin-top:-12px">Click and then brush with your mouse to reveal video frame parts best describing a:</p>
                             <h2 class="lead" style="margin-top:-12px;margin-bottom:-10px;" id="image_label"></h2>
                         </p>
                         <!---<canvas id="myCanvas" width="256" height="256" style="z:10000;text-align:center;margin-bottom:15px;"></canvas>--->
@@ -211,13 +211,13 @@
                         <p style="margin-top:-20px;"><span style="color:white;font-size:50%;">100 pts </span><a id='progressbar' style="margin-top:-20px;"></a><span style="color:white;font-size:50%;"> 0 pts</span></p>
                         <!--<canvas id="ppChart" style="margin-left:-50px; margin-top:-10px;" width="300" height="60"></canvas></p>-->
                         <p id="text_feedback" style="color:white;margin-top:-15px;">_____</p>
-                        <button type="button" style="height:20px;font-size:66%;margin-top:0px;margin-bottom:5px;line-height:5px;" class="btn btn-secondary" id="skip_button" data-toggle="tooltip" data-placement="top" title="Careful, this may deduct points from your score."><b>Skip this image</b>: it has a strange label or poor quality.</button>
+                        <button type="button" style="height:20px;font-size:66%;margin-top:0px;margin-bottom:5px;line-height:5px;" class="btn btn-secondary" id="skip_button" data-toggle="tooltip" data-placement="top" title="Careful, this may deduct points from your score."><b>Skip this video</b>: it has a strange label or poor quality.</button>
                         <!---<hr width="256px;" style="margin-top:0px;"> --->
                         <hr width="224px;" style="margin-top:0px;">
                         <!--<p class="lead" style="color:white;">Status</p> -->
                         <p class="lead" style="margin-top:-20px;"><small id='click_count' style="color:white;">Your score: 0</small>&emsp;|&emsp;<small id='click_high_score' style="color:white;">Today's high score: 0</small>
                         <br>
-                        <em style="font-size:50%;">Number of images needed until we can improve this AI's recognition.</em><br>
+                        <em style="font-size:50%;">Number of videos needed until we can improve this AI's recognition.</em><br>
                         <canvas id="myChart" style="margin-left:-50px" width="300" height="60"></canvas></p>
                     </div>
             </div>
