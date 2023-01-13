@@ -174,6 +174,7 @@ function postVideo(video_link,ctx){
           }
           if(frame>((endLength*fps) - 1)){
             video.pause();
+            break;
           }
         })();
         image = $this;
