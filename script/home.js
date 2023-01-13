@@ -123,7 +123,7 @@ function postImage(image_link,ctx){
     imgLoaded = false;
     image.src = 'data:image/JPEG;base64,' + image_link;
     image.onload = function(){
-
+        console.log('in postImage onload');
         const im_w = image.width;
         const im_h = image.height;
         const sx_custom = (im_w - im_crop_width)/2
@@ -645,7 +645,9 @@ function revert_title(){
 }
 
 function clicked(e) {
+    console.log('in clicked');
     if (imgLoaded) {
+        console.log('in clicked and imgLoaded=true');
         if (posx < 0 || posx > global_width || posy < 0 || posy > global_height){}
         else{
             if (click_array.length === 0){
