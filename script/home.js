@@ -121,7 +121,8 @@ function getImage(ctx){
 function postImage(image_link,ctx){
     image = new Image();
     imgLoaded = false;
-    image.src = 'data:image/JPEG;base64,' + image_link;
+    image.src = image_link;
+    //image.src = 'data:image/JPEG;base64,' + image_link;
     image.onload = function(){
         console.log('in postImage onload');
         const im_w = image.width;
