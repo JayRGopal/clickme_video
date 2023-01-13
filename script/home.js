@@ -332,10 +332,10 @@ function gate_coordinates(){
 }
 
 function fastDraw(){
-    const im_w = image.width;
-    const im_h = image.height;
-    const sx_custom = (im_w - im_crop_width)/2
-    const sy_custom = (im_h - im_crop_height)/2
+    // const im_w = image.width;
+    // const im_h = image.height;
+    // const sx_custom = (im_w - im_crop_width)/2
+    // const sy_custom = (im_h - im_crop_height)/2
     //if (imgLoaded) ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
     if (imgLoaded) ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
     //if (imgLoaded) ctx.drawImage(image,0,0);
