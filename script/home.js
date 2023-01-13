@@ -666,7 +666,7 @@ function answer_status(c_i,answer_status_timer,pp){
             $('#text_feedback').html('<span style="text-outline:' + text_color + '">+' + String(pp.toFixed(global_precision)) + ' points!</span>');
         }
         else if (c_i < 0){
-            $('#text_feedback').html('Image skipped.');
+            $('#text_feedback').html('Video skipped.');
         }
         revert_title();
     }
@@ -979,7 +979,7 @@ $(document).ready(function(){
     if (mobile) {
         canvas.addEventListener('touchmove', draw_touch, false);
         canvas.addEventListener('touchstart', clicked, false);
-        $('#extra_info').html('Drag your finger across the image to reveal parts best describing a:');
+        $('#extra_info').html('Drag your finger across the video to reveal parts best describing a:');
     }
     else{
         canvas.addEventListener('mousemove', draw, false);
