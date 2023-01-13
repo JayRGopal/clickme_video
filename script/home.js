@@ -123,18 +123,30 @@ function postImage(image_link,ctx){
     imgLoaded = false;
     image.src = image_link;
     //image.src = 'data:image/JPEG;base64,' + image_link;
-    image.onload = function(){
-        console.log('in postImage onload');
-        const im_w = image.width;
-        const im_h = image.height;
-        const sx_custom = (im_w - im_crop_width)/2
-        const sy_custom = (im_h - im_crop_height)/2
-        // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    console.log('in postImage onload');
+    const im_w = image.width;
+    const im_h = image.height;
+    const sx_custom = (im_w - im_crop_width)/2
+    const sy_custom = (im_h - im_crop_height)/2
+    // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    
+    ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    imgLoaded = true;
+    draw_scored_box(0);
+    // image.onload = function(){
+    //     console.log('in postImage onload');
+    //     const im_w = image.width;
+    //     const im_h = image.height;
+    //     const sx_custom = (im_w - im_crop_width)/2
+    //     const sy_custom = (im_h - im_crop_height)/2
+    //     // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
         
-        ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-        imgLoaded = true;
-        draw_scored_box(0);
-    }
+    //     ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    //     imgLoaded = true;
+    //     draw_scored_box(0);
+    // }
+
+    
     //try{
     //    ctx.drawImage(image,0,0);
     //}catch(err){}
