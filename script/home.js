@@ -161,6 +161,7 @@ function postVideo(video_link,ctx){
         const vid_h = $this.videoHeight;
         const sx_custom = (vid_w - im_crop_width)/2;
         const sy_custom = (vid_h - im_crop_height)/2;
+
         (function loop() {
           //if (!$this.paused && !$this.ended) {
           var fps = 60;
@@ -176,12 +177,12 @@ function postVideo(video_link,ctx){
           else{
             video.pause();
             console.log('video pause statement')
-            return;
+            image = $this;
+            console.log('calling postImage')
+            postImage(image,ctx)
           }
         })();
-        console.log('calling postImage')
-        image = $this;
-        postImage(image,ctx)
+
     }, 0);
 
     // video.onload = function(){
