@@ -121,7 +121,8 @@ function getImage(ctx){
 function postImage(image_link,ctx){
     image = new Image();
     imgLoaded = false;
-    image.src = image_link;
+    image = image_link
+    //image.src = image_link;
     //image.src = 'data:image/JPEG;base64,' + image_link;
     console.log('in postImage onload');
     const im_w = image.width;
@@ -146,7 +147,7 @@ function postImage(image_link,ctx){
     //     draw_scored_box(0);
     // }
 
-    
+
     //try{
     //    ctx.drawImage(image,0,0);
     //}catch(err){}
