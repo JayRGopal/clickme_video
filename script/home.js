@@ -172,7 +172,8 @@ function postVideo(video_link,ctx){
             frame = frame + 1;
             setTimeout(loop, 1000 / fps); // drawing at 60 fps
           }
-          if(frame>((endLength*fps) - 1)){
+          //if(frame>((endLength*fps) - 1)){
+          else{
             video.pause();
             return;
           }
