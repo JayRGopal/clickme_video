@@ -35,7 +35,8 @@ app = Flask(__name__)
 @app.route('/guess', methods=['GET', 'POST', 'OPTIONS'])
 def guess_path(): # #
     # Get request data
-   # import pdb;pdb.set_trace()
+    # import pdb;pdb.set_trace()
+    return 'testing return'
     rdata = json.loads(list(request.form.keys())[0])
     # print('Clicks on %s: %d' % (rdata['image_name'], len(rdata['click_array'])))
     # Get true label
