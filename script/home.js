@@ -731,7 +731,7 @@ function start_turn(){
     console.log("Start Turn:", ctx)
     getImage(ctx);
     setup_progressbar();
-    var delayInMilliseconds = 5000; //5 seconds
+    var delayInMilliseconds = 0; //5 seconds ////set back to 5000
     setTimeout(function() {
         if (mobile){
             canvas.addEventListener('touchmove', draw_touch, false);
