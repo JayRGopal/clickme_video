@@ -126,9 +126,9 @@ function getImage(ctx){
 function postImage(image_link,ctx){
     image = new Image();
     imgLoaded = false;
+    image.crossOrigin="Anonymous";
     image = image_link;
     image.crossOrigin="Anonymous";
-    document.querySelectorAll('img').forEach(image => { image.crossOrigin = 'Anonymous'; image.src += ' '; });
     //image.src = 'data:image/JPEG;base64,' + image_link;
     console.log('in postImage onload');
     const im_w = image.width;
