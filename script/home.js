@@ -170,6 +170,7 @@ function postVideo(video_link,ctx){
     var sourceMP4 = document.createElement("source"); 
     sourceMP4.type = "video/mp4";
     sourceMP4.src = video_link;
+    sourceMP4.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
     video.appendChild(sourceMP4);
     this.video = video;
     console.log(video.src);
@@ -177,7 +178,7 @@ function postVideo(video_link,ctx){
     //video.src = "../videos/Toilet.mp4";
     //video.type = "video/mp4";
     //video.src = 'data:video/mp4;base64,' + video_link;
-    video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
+    ///video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
     //video.src = 'https://upload.wikimedia.org/wikipedia/commons/0/09/Traffic_on_Tower_Bridge.webm';
     //video.src = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4';
     console.log(video.src);
