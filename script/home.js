@@ -560,7 +560,7 @@ function call_sven(){
     $.ajax({
         url: cnn_server,
         type: 'POST',
-        data: package_json(click_array,global_label),
+        data: package_json(click_array,global_label, image),
         //contentType: 'application/json',
         success: function (data) {
             console.log("Inside sven, rdata:", data);
