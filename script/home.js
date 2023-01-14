@@ -179,37 +179,65 @@ function postVideo(video_link,ctx){
     //video.src = 'https://upload.wikimedia.org/wikipedia/commons/0/09/Traffic_on_Tower_Bridge.webm';
     //video.src = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4';
     console.log('in postVideo');
-    video.addEventListener('play', function() {
-        console.log('in video listener');
-        var $this = this; //cache
-        var frame = 0;
-        const vid_w = $this.videoWidth;
-        const vid_h = $this.videoHeight;
-        const sx_custom = (vid_w - im_crop_width)/2;
-        const sy_custom = (vid_h - im_crop_height)/2;
+    console.log('in video listener');
+    var $this = this; //cache
+    var frame = 0;
+    const vid_w = $this.videoWidth;
+    const vid_h = $this.videoHeight;
+    const sx_custom = (vid_w - im_crop_width)/2;
+    const sy_custom = (vid_h - im_crop_height)/2;
 
-        (function loop() {
-          //if (!$this.paused && !$this.ended) {
-          var fps = 60;
-          var endLength = 5;
-          if (!$this.ended && frame<(endLength*fps)) {
-            //ctx.drawImage($this, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-            ctx.drawImage($this, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    (function loop() {
+        //if (!$this.paused && !$this.ended) {
+        var fps = 60;
+        var endLength = 5;
+        if (!$this.ended && frame<(endLength*fps)) {
+        //ctx.drawImage($this, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+        ctx.drawImage($this, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+        
+        frame = frame + 1;
+        setTimeout(loop, 1000 / fps); // drawing at 60 fps
+        }
+        //if(frame>((endLength*fps) - 1)){
+        else{
+        video.pause();
+        console.log('video pause statement')
+        image = $this;
+        console.log('calling postImage')
+        postImage(image,ctx)
+        }
+    })();
+    // video.addEventListener('play', function() {
+    //     console.log('in video listener');
+    //     var $this = this; //cache
+    //     var frame = 0;
+    //     const vid_w = $this.videoWidth;
+    //     const vid_h = $this.videoHeight;
+    //     const sx_custom = (vid_w - im_crop_width)/2;
+    //     const sy_custom = (vid_h - im_crop_height)/2;
+
+    //     (function loop() {
+    //       //if (!$this.paused && !$this.ended) {
+    //       var fps = 60;
+    //       var endLength = 5;
+    //       if (!$this.ended && frame<(endLength*fps)) {
+    //         //ctx.drawImage($this, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    //         ctx.drawImage($this, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
             
-            frame = frame + 1;
-            setTimeout(loop, 1000 / fps); // drawing at 60 fps
-          }
-          //if(frame>((endLength*fps) - 1)){
-          else{
-            video.pause();
-            console.log('video pause statement')
-            image = $this;
-            console.log('calling postImage')
-            postImage(image,ctx)
-          }
-        })();
+    //         frame = frame + 1;
+    //         setTimeout(loop, 1000 / fps); // drawing at 60 fps
+    //       }
+    //       //if(frame>((endLength*fps) - 1)){
+    //       else{
+    //         video.pause();
+    //         console.log('video pause statement')
+    //         image = $this;
+    //         console.log('calling postImage')
+    //         postImage(image,ctx)
+    //       }
+    //     })();
 
-    }, 0);
+    // }, 0);
 
     // video.onload = function(){
     //     console.log('testing within video onload')
