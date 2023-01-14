@@ -94,35 +94,37 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
 
 // Main content
 function getImage(ctx){
-	var jqxhr = $.get('/random_image', function () {
-	        })
-    .done(function(data) {
-    //   console.log("Data in getImage:", data)
-      var split_data = data.split('imagestart');
-      var label = split_data[0];
-      var split_label = label.split('!')
-      //
-      global_label = split_label[0];
-      console.log("global label: ", global_label);
-      im_text = split_label[1].trimLeft(1); //we are wandering into a space at the start of labels at some point in the pipeline :(
-      //
-      change_title(im_text);
-      global_image_link = split_data[1];
-      //   console.log(global_image_link);
-      postImage(global_image_link,ctx);
-      return;
-    })
-    // videolink = "../videos/Toilet_trimmed.mp4";
-    // change_title('Bunny Video')
-    // postVideo(videolink, ctx);
+	// var jqxhr = $.get('/random_image', function () {
+	//         })
+    // .done(function(data) {
+    // //   console.log("Data in getImage:", data)
+    //   var split_data = data.split('imagestart');
+    //   var label = split_data[0];
+    //   var split_label = label.split('!')
+    //   //
+    //   global_label = split_label[0];
+    //   console.log("global label: ", global_label);
+    //   im_text = split_label[1].trimLeft(1); //we are wandering into a space at the start of labels at some point in the pipeline :(
+    //   //
+    //   change_title(im_text);
+    //   global_image_link = split_data[1];
+    //   //   console.log(global_image_link);
+    //   postImage(global_image_link,ctx);
+    //   return;
+    // })
+
+    videolink = "../videos/Toilet_trimmed.mp4";
+    global_label = videolink;
+    im_text = 'Bunny';
+    change_title(im_text);
+    postVideo(videolink, ctx);
 }
 
 function postImage(image_link,ctx){
     image = new Image();
     imgLoaded = false;
-    ////image = image_link
-    //image.src = image_link;
-    image.src = 'data:image/JPEG;base64,' + image_link;
+    image = image_link
+    //image.src = 'data:image/JPEG;base64,' + image_link;
     console.log('in postImage onload');
     const im_w = image.width;
     const im_h = image.height;
@@ -168,8 +170,8 @@ function postVideo(video_link,ctx){
     imgLoaded = false;
     var sourceMP4 = document.createElement("source"); 
     sourceMP4.type = "video/mp4";
-    sourceMP4.src = video_link;
-    sourceMP4.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
+    //sourceMP4.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
+    sourceMP4.src = video_link; 
     video.appendChild(sourceMP4);
     this.video = video;
     console.log(video.src);
@@ -731,39 +733,41 @@ function start_turn(){
     console.log("Start Turn:", ctx)
     getImage(ctx);
     setup_progressbar();
-    if (mobile){
-        canvas.addEventListener('touchmove', draw_touch, false);
-        canvas.addEventListener('touchstart', clicked, false);
-        $('#extra_info').html('Drag your finger across the video to reveal parts best describing a:');
-    }
-    else{
-        canvas.addEventListener('mousemove', draw, false);
-        canvas.addEventListener('mousedown', clicked, false);
-    }
-    if (num_turns > remove_info_after){
-        if (mobile){}else{
-            $('#next_prize').fadeOut();
+    // if (mobile){
+    //     canvas.addEventListener('touchmove', draw_touch, false);
+    //     canvas.addEventListener('touchstart', clicked, false);
+    //     $('#extra_info').html('Drag your finger across the video to reveal parts best describing a:');
+    // }
+    // else{
+    //     canvas.addEventListener('mousemove', draw, false);
+    //     canvas.addEventListener('mousedown', clicked, false);
+    // }
+    // if (num_turns > remove_info_after){
+    //     if (mobile){}else{
+    //         $('#next_prize').fadeOut();
+    //     }
+    //     $('#extra_info').fadeOut();
+    // }
+
+
+    var delayInMilliseconds = 5000; //5 seconds ////set back to 5000
+    setTimeout(function() {
+        if (mobile){
+            canvas.addEventListener('touchmove', draw_touch, false);
+            canvas.addEventListener('touchstart', clicked, false);
+            $('#extra_info').html('Drag your finger across the video to reveal parts best describing a:');
         }
-        $('#extra_info').fadeOut();
-    }
-    // var delayInMilliseconds = 5000; //5 seconds ////set back to 5000
-    // setTimeout(function() {
-    //     if (mobile){
-    //         canvas.addEventListener('touchmove', draw_touch, false);
-    //         canvas.addEventListener('touchstart', clicked, false);
-    //         $('#extra_info').html('Drag your finger across the video to reveal parts best describing a:');
-    //     }
-    //     else{
-    //         canvas.addEventListener('mousemove', draw, false);
-    //         canvas.addEventListener('mousedown', clicked, false);
-    //     }
-    //     if (num_turns > remove_info_after){
-    //         if (mobile){}else{
-    //             $('#next_prize').fadeOut();
-    //         }
-    //         $('#extra_info').fadeOut();
-    //     }
-    // }, delayInMilliseconds);
+        else{
+            canvas.addEventListener('mousemove', draw, false);
+            canvas.addEventListener('mousedown', clicked, false);
+        }
+        if (num_turns > remove_info_after){
+            if (mobile){}else{
+                $('#next_prize').fadeOut();
+            }
+            $('#extra_info').fadeOut();
+        }
+    }, delayInMilliseconds);
       
 }
 
