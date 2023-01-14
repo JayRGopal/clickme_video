@@ -177,9 +177,10 @@ function postVideo(video_link,ctx){
     //video.src = "../videos/Toilet.mp4";
     //video.type = "video/mp4";
     //video.src = 'data:video/mp4;base64,' + video_link;
-    ///video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
+    video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
     //video.src = 'https://upload.wikimedia.org/wikipedia/commons/0/09/Traffic_on_Tower_Bridge.webm';
     //video.src = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4';
+    console.log(video.src);
     console.log('in postVideo');
     console.log('in video listener');
     var $this = this; //cache
