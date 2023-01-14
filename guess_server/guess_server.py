@@ -36,11 +36,11 @@ app = Flask(__name__)
 def guess_path(): # #
     # Get request data
     # import pdb;pdb.set_trace()
-    #return 'testing return'
     rdata = json.loads(list(request.form.keys())[0])
     
     # print('Clicks on %s: %d' % (rdata['image_name'], len(rdata['click_array'])))
     # Get true label
+    return rdata
     class_index = int(os.path.basename(rdata['image_name']).split('_')[0])
     print('True label: %s' % class_names[class_index])
     # Ask the oracle
