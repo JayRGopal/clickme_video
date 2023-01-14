@@ -731,24 +731,39 @@ function start_turn(){
     console.log("Start Turn:", ctx)
     getImage(ctx);
     setup_progressbar();
-    var delayInMilliseconds = 0; //5 seconds ////set back to 5000
-    setTimeout(function() {
-        if (mobile){
-            canvas.addEventListener('touchmove', draw_touch, false);
-            canvas.addEventListener('touchstart', clicked, false);
-            $('#extra_info').html('Drag your finger across the video to reveal parts best describing a:');
+    if (mobile){
+        canvas.addEventListener('touchmove', draw_touch, false);
+        canvas.addEventListener('touchstart', clicked, false);
+        $('#extra_info').html('Drag your finger across the video to reveal parts best describing a:');
+    }
+    else{
+        canvas.addEventListener('mousemove', draw, false);
+        canvas.addEventListener('mousedown', clicked, false);
+    }
+    if (num_turns > remove_info_after){
+        if (mobile){}else{
+            $('#next_prize').fadeOut();
         }
-        else{
-            canvas.addEventListener('mousemove', draw, false);
-            canvas.addEventListener('mousedown', clicked, false);
-        }
-        if (num_turns > remove_info_after){
-            if (mobile){}else{
-                $('#next_prize').fadeOut();
-            }
-            $('#extra_info').fadeOut();
-        }
-    }, delayInMilliseconds);
+        $('#extra_info').fadeOut();
+    }
+    // var delayInMilliseconds = 5000; //5 seconds ////set back to 5000
+    // setTimeout(function() {
+    //     if (mobile){
+    //         canvas.addEventListener('touchmove', draw_touch, false);
+    //         canvas.addEventListener('touchstart', clicked, false);
+    //         $('#extra_info').html('Drag your finger across the video to reveal parts best describing a:');
+    //     }
+    //     else{
+    //         canvas.addEventListener('mousemove', draw, false);
+    //         canvas.addEventListener('mousedown', clicked, false);
+    //     }
+    //     if (num_turns > remove_info_after){
+    //         if (mobile){}else{
+    //             $('#next_prize').fadeOut();
+    //         }
+    //         $('#extra_info').fadeOut();
+    //     }
+    // }, delayInMilliseconds);
       
 }
 
