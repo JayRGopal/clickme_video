@@ -38,7 +38,7 @@ def guess_path(): # #
     # import pdb;pdb.set_trace()
     #return 'testing return'
     rdata = json.loads(list(request.form.keys())[0])
-    return rdata
+    
     # print('Clicks on %s: %d' % (rdata['image_name'], len(rdata['click_array'])))
     # Get true label
     class_index = int(os.path.basename(rdata['image_name']).split('_')[0])
