@@ -113,7 +113,8 @@ function getImage(ctx){
     //   return;
     // })
 
-    videolink = "../videos/Toilet_trimmed.mp4";
+    //videolink = "../videos/Toilet_trimmed.mp4";
+    videolink = 'http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv';
     global_label = videolink;
     im_text = 'Bunny';
     change_title(im_text);
