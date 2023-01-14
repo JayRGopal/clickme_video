@@ -139,6 +139,7 @@ function postImage(image_link,ctx){
     imgLoaded = true;
     draw_scored_box(0);
     image64data = canvas.toDataURL();
+    console.log('image64data in postimage', image64data);
     // image.onload = function(){
     //     console.log('in postImage onload');
     //     const im_w = image.width;
