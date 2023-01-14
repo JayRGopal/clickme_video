@@ -167,7 +167,7 @@ function postVideo(video_link,ctx){
     video.height = canvas_width;
     video.width = canvas_height;
     video.autoplay = true;
-    video.playsinline = true;
+    //video.playsinline = true;
     vidLoaded = false;
     imgLoaded = false;
     var sourceMP4 = document.createElement("source"); 
