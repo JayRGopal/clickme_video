@@ -115,6 +115,7 @@ function getImage(ctx){
     //   return;
     // })
     videolink = "../videos/Toilet_trimmed.mp4";
+    change_title('Bunny Video')
     postVideo(videolink, ctx);
 }
 
@@ -736,7 +737,9 @@ function start_turn(){
         if (mobile){
             canvas.addEventListener('touchmove', draw_touch, false);
             canvas.addEventListener('touchstart', clicked, false);
-        }else{
+            $('#extra_info').html('Drag your finger across the video to reveal parts best describing a:');
+        }
+        else{
             canvas.addEventListener('mousemove', draw, false);
             canvas.addEventListener('mousedown', clicked, false);
         }
@@ -990,15 +993,15 @@ $(document).ready(function(){
     global_height = canvas.height;
     // Initial score
     update_user_data();
-    if (mobile) {
-        canvas.addEventListener('touchmove', draw_touch, false);
-        canvas.addEventListener('touchstart', clicked, false);
-        $('#extra_info').html('Drag your finger across the video to reveal parts best describing a:');
-    }
-    else{
-        canvas.addEventListener('mousemove', draw, false);
-        canvas.addEventListener('mousedown', clicked, false);
-    }
+    // if (mobile) {
+    //     canvas.addEventListener('touchmove', draw_touch, false);
+    //     canvas.addEventListener('touchstart', clicked, false);
+    //     $('#extra_info').html('Drag your finger across the video to reveal parts best describing a:');
+    // }
+    // else{
+    //     canvas.addEventListener('mousemove', draw, false);
+    //     canvas.addEventListener('mousedown', clicked, false);
+    // }
     start_turn();
     // Modals
     $('#scoreboard-modal').click(function(){$("#scoreModal").modal('show');});
