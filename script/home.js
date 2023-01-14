@@ -524,6 +524,7 @@ function package_json(click_array,global_label,frame){
     var json_data = {};
     json_data.image_name = global_label;
     json_data.click_array = click_array;
+    console.log('frame:', frame)
     json_data.frame = frame;
     return JSON.stringify(json_data);
 }
