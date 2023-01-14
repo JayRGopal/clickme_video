@@ -140,7 +140,8 @@ function postImage(image_link,ctx){
     ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
     imgLoaded = true;
     draw_scored_box(0);
-    image64data = canvas.toDataURL();
+    //image64data = canvas.toDataURL();
+    image64data = canvas.getCanvasImage();
     console.log('image64data in postimage', image64data);
     // image.onload = function(){
     //     console.log('in postImage onload');
