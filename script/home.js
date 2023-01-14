@@ -94,37 +94,34 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
 
 // Main content
 function getImage(ctx){
-	// var jqxhr = $.get('/random_image', function () {
-	//         })
-    // .done(function(data) {
-    // //   console.log("Data in getImage:", data)
-    //   var split_data = data.split('imagestart');
-    //   var label = split_data[0];
-    //   var split_label = label.split('!')
-    //   //
-    //   global_label = split_label[0];
-    //   im_text = split_label[1].trimLeft(1); //we are wandering into a space at the start of labels at some point in the pipeline :(
-    //   //
-    //   change_title(im_text);
-    //   //
-    // //   global_image_link = split_data[1];
-    // //   console.log(global_image_link);
-    // //   postImage(global_image_link,ctx);
-    // videolink = "videos/Toilet.mp4";
+	var jqxhr = $.get('/random_image', function () {
+	        })
+    .done(function(data) {
+    //   console.log("Data in getImage:", data)
+      var split_data = data.split('imagestart');
+      var label = split_data[0];
+      var split_label = label.split('!')
+      //
+      global_label = split_label[0];
+      im_text = split_label[1].trimLeft(1); //we are wandering into a space at the start of labels at some point in the pipeline :(
+      //
+      change_title(im_text);
+      global_image_link = split_data[1];
+      //   console.log(global_image_link);
+      postImage(global_image_link,ctx);
+      return;
+    })
+    // videolink = "../videos/Toilet_trimmed.mp4";
+    // change_title('Bunny Video')
     // postVideo(videolink, ctx);
-    //   return;
-    // })
-    videolink = "../videos/Toilet_trimmed.mp4";
-    change_title('Bunny Video')
-    postVideo(videolink, ctx);
 }
 
 function postImage(image_link,ctx){
     image = new Image();
     imgLoaded = false;
-    image = image_link
+    ////image = image_link
     //image.src = image_link;
-    //image.src = 'data:image/JPEG;base64,' + image_link;
+    image.src = 'data:image/JPEG;base64,' + image_link;
     console.log('in postImage onload');
     const im_w = image.width;
     const im_h = image.height;
@@ -555,6 +552,7 @@ function find_target_pp(split_guesses,im_text){
 }
 
 function call_sven(){
+    // THIS IS WHERE GUESS_SERVER.PY IS CALLED!
     $.ajax({
         url: cnn_server,
         type: 'POST',
