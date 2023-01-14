@@ -171,6 +171,7 @@ function postVideo(video_link,ctx){
     sourceMP4.src = video_link;
     video.appendChild(sourceMP4);
     this.video = video;
+    console.log(video.src);
     //video.src = video_link;
     //video.src = "../videos/Toilet.mp4";
     //video.type = "video/mp4";
