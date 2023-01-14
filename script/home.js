@@ -126,7 +126,8 @@ function getImage(ctx){
 function postImage(image_link,ctx){
     image = new Image();
     imgLoaded = false;
-    image = image_link
+    image = image_link;
+    image.crossorigin="anonymous";
     //image.src = 'data:image/JPEG;base64,' + image_link;
     console.log('in postImage onload');
     const im_w = image.width;
