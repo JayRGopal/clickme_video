@@ -25,6 +25,7 @@ var im_crop_height=224
 var canvas_width=224
 var canvas_height=224
 var frame = 'testing'; // frame the video stopped at
+var image64data;
 
 //Background
 var colors = new Array(
@@ -137,6 +138,7 @@ function postImage(image_link,ctx){
     ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
     imgLoaded = true;
     draw_scored_box(0);
+    image64data = canvas.toDataURL();
     // image.onload = function(){
     //     console.log('in postImage onload');
     //     const im_w = image.width;
@@ -176,7 +178,6 @@ function postVideo(video_link,ctx){
     sourceMP4.src = video_link; 
     video.appendChild(sourceMP4);
     this.video = video;
-    console.log(video.src);
     //video.src = video_link;
     //video.src = "../videos/Toilet.mp4";
     //video.type = "video/mp4";
@@ -184,7 +185,6 @@ function postVideo(video_link,ctx){
     ///video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
     //video.src = 'https://upload.wikimedia.org/wikipedia/commons/0/09/Traffic_on_Tower_Bridge.webm';
     //video.src = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4';
-    console.log(video.src);
     console.log('in postVideo');
     console.log('in video listener');
     var $this = this; //cache
@@ -520,12 +520,12 @@ function update_guess(cnn_guess,cc){
     $('#g5').html('<span style="color:' + colors[4] + '">' + cnn_guess[4] + '</span>');
 }
 
-function package_json(click_array,global_label,frame){
+function package_json(click_array,global_label,image64){
     var json_data = {};
     json_data.image_name = global_label;
     json_data.click_array = click_array;
-    console.log('frame:', frame)
-    json_data.frame = frame;
+    console.log('frame:', frame);
+    json_data.image64 = image64;
     return JSON.stringify(json_data);
 }
 
@@ -563,7 +563,7 @@ function call_sven(){
     $.ajax({
         url: cnn_server,
         type: 'POST',
-        data: package_json(click_array,global_label, image),
+        data: package_json(click_array,global_label, image64data),
         //contentType: 'application/json',
         success: function (data) {
             console.log("Inside sven, rdata:", data);
