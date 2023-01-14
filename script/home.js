@@ -103,7 +103,7 @@ function getImage(ctx){
       var split_label = label.split('!')
       //
       global_label = split_label[0];
-      console.log(global_label);
+      console.log("global label: ", global_label);
       im_text = split_label[1].trimLeft(1); //we are wandering into a space at the start of labels at some point in the pipeline :(
       //
       change_title(im_text);
