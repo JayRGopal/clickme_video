@@ -24,7 +24,7 @@ var im_crop_width=224
 var im_crop_height=224
 var canvas_width=224
 var canvas_height=224
-var frame; // frame the video stopped at
+var frame = 'testing'; // frame the video stopped at
 
 //Background
 var colors = new Array(
@@ -188,7 +188,7 @@ function postVideo(video_link,ctx){
     console.log('in postVideo');
     console.log('in video listener');
     var $this = this; //cache
-    var frame = 0;
+    frame = 0;
     const vid_w = $this.videoWidth;
     const vid_h = $this.videoHeight;
     const sx_custom = (vid_w - im_crop_width)/2;
