@@ -24,6 +24,7 @@ var im_crop_width=224
 var im_crop_height=224
 var canvas_width=224
 var canvas_height=224
+var frame; // frame the video stopped at
 
 //Background
 var colors = new Array(
@@ -196,7 +197,7 @@ function postVideo(video_link,ctx){
     video.addEventListener('play', function() {
         console.log('in video listener');
         var $this = this; //cache
-        var frame = 0;
+        frame = 0;
         const vid_w = $this.videoWidth;
         const vid_h = $this.videoHeight;
         const sx_custom = (vid_w - im_crop_width)/2;
@@ -519,10 +520,11 @@ function update_guess(cnn_guess,cc){
     $('#g5').html('<span style="color:' + colors[4] + '">' + cnn_guess[4] + '</span>');
 }
 
-function package_json(click_array,global_label){
+function package_json(click_array,global_label,frame){
     var json_data = {};
     json_data.image_name = global_label;
     json_data.click_array = click_array;
+    json_data.frame = frame;
     return JSON.stringify(json_data);
 }
 
