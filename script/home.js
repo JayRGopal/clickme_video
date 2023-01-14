@@ -157,6 +157,7 @@ function postImage(image_link,ctx){
 function postVideo(video_link,ctx){
     //var video = document.getElementById("video");
     var video = document.createElement('video');
+    this.video = video;
     video.controls = false;
     //video.muted = false;
     video.hidden= true;
