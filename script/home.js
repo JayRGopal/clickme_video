@@ -563,6 +563,7 @@ function call_sven(){
         data: package_json(click_array,global_label),
         //contentType: 'application/json',
         success: function (data) {
+            console.log("Inside sven, rdata:", data);
             var guess_pp = data.split('@');
             console.log("Inside sven:", guess_pp, im_text);
             // var pps = str_to_float(guess_pp[1].split('!'));
