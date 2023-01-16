@@ -24,8 +24,9 @@ var im_crop_width=224
 var im_crop_height=224
 var canvas_width=224
 var canvas_height=224
-var frame = 'testing'; // frame the video stopped at
-var image64data;
+var frame; // frame the video stopped at
+var VIDEO_PATH = '/home/jay_gopal_brown_edu/clickme_video/videos';
+var all_vid_categories;
 
 //Background
 var colors = new Array(
@@ -92,10 +93,17 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
   }
 }
 
-
+function getDirectories(path) {
+    return fs.readdirSync(path).filter(function (file) {
+        return fs.statSync(path+'/'+file).isDirectory();
+    });
+}
 
 // Main content
 function getImage(ctx){
+    // Chooses a random video to play
+    // Calls on postVideo, sending the path to the video (JPEG files)
+
 	// var jqxhr = $.get('/random_image', function () {
 	//         })
     // .done(function(data) {
@@ -116,7 +124,10 @@ function getImage(ctx){
     // })
 
     //videolink = "/home/jay_gopal_brown_edu/clickme_video/videos/Toilet_trimmed.mp4"; // MAKE THIS ABSOLUTE
-    videolink = 'http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv';
+    //videolink = 'http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv';
+
+    all_vid_categories = getDirectories(VIDEO_PATH);
+    console.log(all_vid_categories);
     global_label = videolink;
     im_text = 'Bunny';
     change_title(im_text);
@@ -126,36 +137,26 @@ function getImage(ctx){
 function postImage(image_link,ctx){
     image = new Image();
     imgLoaded = false;
+    //image = image_link;
     image.crossOrigin="Anonymous";
-    image = image_link;
-    image.crossOrigin="Anonymous";
-    //image.src = 'data:image/JPEG;base64,' + image_link;
-    console.log('in postImage onload');
-    const im_w = image.width;
-    const im_h = image.height;
-    const sx_custom = (im_w - im_crop_width)/2
-    const sy_custom = (im_h - im_crop_height)/2
+    image.src = 'data:image/JPEG;base64,' + image_link;
+    // const im_w = image.width;
+    // const im_h = image.height;
+    // const sx_custom = (im_w - im_crop_width)/2
+    // const sy_custom = (im_h - im_crop_height)/2
     // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
     
-    ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-    imgLoaded = true;
-    draw_scored_box(0);
-    image64data = image;
-    //image64data = canvas.toDataURL();
-    //image64data = canvas.getCanvasImage();
-    console.log('image64data in postimage', image64data);
-    // image.onload = function(){
-    //     console.log('in postImage onload');
-    //     const im_w = image.width;
-    //     const im_h = image.height;
-    //     const sx_custom = (im_w - im_crop_width)/2
-    //     const sy_custom = (im_h - im_crop_height)/2
-    //     // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    // ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    // imgLoaded = true;
+    // draw_scored_box(0);
+    image.onload = function(){
+        console.log('in postImage onload');
+        // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
         
-    //     ctx.drawImage(image, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-    //     imgLoaded = true;
-    //     draw_scored_box(0);
-    // }
+        ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+        imgLoaded = true;
+        draw_scored_box(0);
+    }
 
 
     //try{
@@ -536,12 +537,10 @@ function update_guess(cnn_guess,cc){
     $('#g5').html('<span style="color:' + colors[4] + '">' + cnn_guess[4] + '</span>');
 }
 
-function package_json(click_array,global_label,image64){
+function package_json(click_array,global_label){
     var json_data = {};
     json_data.image_name = global_label;
     json_data.click_array = click_array;
-    console.log('frame:', frame);
-    json_data.image64 = image64;
     return JSON.stringify(json_data);
 }
 
@@ -579,7 +578,7 @@ function call_sven(){
     $.ajax({
         url: cnn_server,
         type: 'POST',
-        data: package_json(click_array,global_label, image64data),
+        data: package_json(click_array,global_label),
         //contentType: 'application/json',
         success: function (data) {
             console.log("Inside sven, rdata:", data);
