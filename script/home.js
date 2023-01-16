@@ -210,7 +210,7 @@ function postVideo(video_link,ctx){
         (function loop() {
           //if (!$this.paused && !$this.ended) {
           var fps = 60;
-          var endLength = 5;
+          var endLength = 3;
           if (!$this.ended && frame<(endLength*fps)) {
             //ctx.drawImage($this, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
             ctx.drawImage($this, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
