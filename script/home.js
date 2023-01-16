@@ -115,7 +115,7 @@ function getImage(ctx){
     //   return;
     // })
 
-    videolink = "videos/Toilet_trimmed.mp4"; // MAKE THIS ABSOLUTE
+    videolink = "/home/jay_gopal_brown_edu/clickme_video/videos/Toilet_trimmed.mp4"; // MAKE THIS ABSOLUTE
     //videolink = 'http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv';
     global_label = videolink;
     im_text = 'Bunny';
