@@ -27,8 +27,8 @@ var canvas_height=224
 var frame; // frame the video stopped at
 var VIDEO_PATH = '/home/jay_gopal_brown_edu/clickme_video/videos';
 var all_vid_categories;
-import fs from 'fs';
-import path from 'path';
+const fs = require("fs");
+const path = require('path');
 
 //Background
 var colors = new Array(
