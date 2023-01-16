@@ -134,7 +134,7 @@ function getImage(ctx){
 
     // Decide on video category (label)
     console.log(all_vid_categories);
-    const rndIndex = randomIntFromInterval(0, all_vid_categories.length - 1)
+    var rndIndex = randomIntFromInterval(0, all_vid_categories.length - 1)
     global_label = VIDEO_PATH + '/' + all_vid_categories[rndIndex];
     im_text = all_vid_categories[rndIndex];
     change_title(im_text);
@@ -332,12 +332,12 @@ function intToTitle(our_int) {
 
 
 async function getVideoTrack(video_src_here) {
-    const video = document.createElement("video");
+    var video = document.createElement("video");
     video.crossOrigin = "anonymous";
     video.src = video_src_here;
     document.body.append(video);
     await video.play();
-    const [track] = video.captureStream().getVideoTracks();
+    var [track] = video.captureStream().getVideoTracks();
     video.onended = (evt) => track.stop();
     return track;
 }
