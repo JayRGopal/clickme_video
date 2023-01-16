@@ -198,14 +198,6 @@ function postVideo(video_link,ctx){
     // stop after endLength seconds, going at the specified fps rate
     var finalFrame = endLength*fps + frame;
 
-    // first image in video
-    var tempImPath = master_path + intToTitle(frame) + ".jpg"; 
-    image.src = tempImPath
-    const im_w = image.width;
-    const im_h = image.height;
-    const sx_custom = (im_w - im_crop_width)/2
-    const sy_custom = (im_h - im_crop_height)/2 
-
     (function loop() {
         if (frame<finalFrame) {
             final_image_path = master_path + intToTitle(frame) + ".jpg";
