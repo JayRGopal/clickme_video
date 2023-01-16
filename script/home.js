@@ -201,6 +201,7 @@ function postVideo(video_link,ctx){
         if (frame<finalFrame) {
             final_image_path = master_path + intToTitle(frame) + ".jpg";
             image.src = 'data:image/JPEG;base64,' + final_image_path;
+            image.src = final_image_path;
             image.onload = function(){
                 ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
                 frame = frame + 1;
