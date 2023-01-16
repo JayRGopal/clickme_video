@@ -169,7 +169,7 @@ function postVideo(video_link,ctx){
     this.video = video;
     video.controls = false;
     //video.muted = false;
-    video.hidden= false;
+    video.hidden= true;
     video.height = canvas_width;
     video.width = canvas_height;
     video.autoplay = true;
@@ -182,6 +182,7 @@ function postVideo(video_link,ctx){
     sourceMP4.src = video_link; 
     video.appendChild(sourceMP4);
     this.video = video;
+    document.body.append(video);
     //video.src = video_link;
     //video.src = "../videos/Toilet.mp4";
     //video.type = "video/mp4";
@@ -259,6 +260,17 @@ function postVideo(video_link,ctx){
     //try{
     //    ctx.drawImage(image,0,0);
     //}catch(err){}
+}
+
+async function getVideoTrack(video_src_here) {
+    const video = document.createElement("video");
+    video.crossOrigin = "anonymous";
+    video.src = video_src_here;
+    document.body.append(video);
+    await video.play();
+    const [track] = video.captureStream().getVideoTracks();
+    video.onended = (evt) => track.stop();
+    return track;
 }
 
 function change_title(text){
