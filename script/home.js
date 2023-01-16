@@ -1107,7 +1107,7 @@ $(document).ready(function(){
     //     canvas.addEventListener('mousemove', draw, false);
     //     canvas.addEventListener('mousedown', clicked, false);
     // }
-    start_turn();
+
     // Modals
     $('#scoreboard-modal').click(function(){$("#scoreModal").modal('show');});
     $('#instruction-modal').click(function(){$("#update_email_text_modal").attr('placeholder',check_email());$('#instructionModal').modal('show');});
@@ -1119,7 +1119,7 @@ $(document).ready(function(){
     }else{
         $('#skip_button').css({'background-color':'white'});
     }
-     
+    
     $('#skip_button').click(function(){skip_question()});
     //$('#agree').click(function(){upload_email();$("#consentModal").modal('hide');});
     $('#update_email_modal').click(function(){update_email()});
@@ -1132,6 +1132,12 @@ $(document).ready(function(){
     $('#scoreboard_time_1').text('Amazon gift cards awarded to the top-5 scoring players on ' + next_date() + ' in the following amounts:');
     $('#scoreboard_time_2').text('Amazon gift cards awarded to the top-5 scoring players on ' + next_date() + ' in the following amounts:');
     zoomOut();
+    
+    document.getElementById("instructionsButton").addEventListener("click", startTurnFunction);
+
+    function startTurnFunction(){
+        start_turn();
+    }
     // Refresh the screen for mobile
     // adjust_for_mobile();
 })
