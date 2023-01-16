@@ -8,7 +8,7 @@ import json
 from guesser import load_guesser, get_image_prediction
 import traceback
 import tensorflow as tf
-from extract_video_frame import extract_frame
+#from extract_video_frame import extract_frame
 
 
 '''
