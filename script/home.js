@@ -138,6 +138,7 @@ function postImage(image_link,ctx){
     // ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
     
     ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    console.log(image);
     imgLoaded = true;
     draw_scored_box(0);
     //image64data = canvas.toDataURL();
