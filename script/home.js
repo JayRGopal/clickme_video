@@ -115,7 +115,7 @@ function getImage(ctx){
     //   return;
     // })
 
-    videolink = "../videos/Toilet_trimmed.mp4";
+    videolink = "videos/Toilet_trimmed.mp4"; // MAKE THIS ABSOLUTE
     //videolink = 'http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv';
     global_label = videolink;
     im_text = 'Bunny';
@@ -190,7 +190,6 @@ function postVideo(video_link,ctx){
     //video.src = 'https://upload.wikimedia.org/wikipedia/commons/0/09/Traffic_on_Tower_Bridge.webm';
     //video.src = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4';
     console.log('in postVideo');
-    console.log('in video listener');
     var $this = this; //cache
     frame = 0;
     const vid_w = $this.videoWidth;
