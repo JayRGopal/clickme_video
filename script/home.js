@@ -155,7 +155,8 @@ function postImage(image_link,ctx){
     //image = image_link;
     image.crossOrigin="Anonymous";
     image.src = 'data:image/JPEG;base64,' + image_link;
-    // const im_w = image.width;
+    image.src = image_link;
+    // const im_w = image.width;i
     // const im_h = image.height;
     // const sx_custom = (im_w - im_crop_width)/2
     // const sy_custom = (im_h - im_crop_height)/2
@@ -1132,7 +1133,7 @@ $(document).ready(function(){
     $('#scoreboard_time_1').text('Amazon gift cards awarded to the top-5 scoring players on ' + next_date() + ' in the following amounts:');
     $('#scoreboard_time_2').text('Amazon gift cards awarded to the top-5 scoring players on ' + next_date() + ' in the following amounts:');
     zoomOut();
-    
+
     document.getElementById("instructionsButton").addEventListener("click", startTurnFunction);
 
     function startTurnFunction(){
