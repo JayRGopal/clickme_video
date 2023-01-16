@@ -169,7 +169,7 @@ function postVideo(video_link,ctx){
     this.video = video;
     video.controls = false;
     //video.muted = false;
-    video.hidden= true;
+    video.hidden= false;
     video.height = canvas_width;
     video.width = canvas_height;
     video.autoplay = true;
