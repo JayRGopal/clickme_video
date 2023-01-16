@@ -27,8 +27,6 @@ var canvas_height=224
 var frame; // frame the video stopped at
 var VIDEO_PATH = '/home/jay_gopal_brown_edu/clickme_video/videos';
 var all_vid_categories;
-const fs = require("fs");
-const path = require('path');
 const TOTAL_FRAMES = 201; // total frames per video
 var final_image_path;
 
