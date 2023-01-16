@@ -154,7 +154,7 @@ function postImage(image_link,ctx){
     imgLoaded = false;
     //image = image_link;
     image.crossOrigin="Anonymous";
-    image.src = 'data:image/JPEG;base64,' + image_link;
+    image.src = 'data:image/JPG;base64,' + image_link;
     image.src = image_link;
     // const im_w = image.width;i
     // const im_h = image.height;
@@ -200,14 +200,13 @@ function postVideo(video_link,ctx){
     (function loop() {
         if (frame<finalFrame) {
             final_image_path = master_path + intToTitle(frame) + ".jpg";
-            image.src = 'data:image/JPEG;base64,' + final_image_path;
-            image.src = final_image_path;
+            image.src = 'data:image/JPG;base64,' + final_image_path;
+            //image.src = final_image_path;
             image.onload = function(){
                 ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
                 frame = frame + 1;
+                setTimeout(loop, 1000 / fps); // drawing at the specified fps
             }
-
-            setTimeout(loop, 1000 / fps); // drawing at the specified fps
         }
         else{
             console.log('video pause statement')
