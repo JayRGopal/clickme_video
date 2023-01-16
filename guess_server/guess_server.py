@@ -8,7 +8,8 @@ import json
 from guesser import load_guesser, get_image_prediction
 import traceback
 import tensorflow as tf
-import base64
+from extract_video_frame import extract_frame
+
 
 '''
 tf.compat.v1.disable_eager_execution()
