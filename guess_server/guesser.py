@@ -2,6 +2,7 @@
 # CNN and cached image holder answering guesses
 
 import os
+import re
 # import cv2
 from PIL import Image
 import keras
@@ -39,8 +40,9 @@ def preprocess_harmonized(image, final_size=(224, 224)):
     return image
 
 
-def load_im(im_name, data_dir=data_dir, final_size=CANVAS_SIZE):
-    fpath = data_dir + im_name
+def load_im(im_name, final_size=CANVAS_SIZE):
+    ## ASSUMES im_name IS THE FULL FILE PATH TO IMAGE!
+    fpath = im_name
     im = Image.open(fpath)
     im = np.array(im, dtype=np.float32)
     if len(im.shape) == 2:
@@ -160,7 +162,6 @@ def get_image_prediction(guesser, image_name, clicks, click_size=21): # TODO: Us
     print("Model Confidence:", prob[0][class_index])
     return prediction_name
 
-import re
 
 '''
 def get_synset():

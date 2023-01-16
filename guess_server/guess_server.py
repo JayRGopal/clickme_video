@@ -43,15 +43,15 @@ def guess_path(): # #
     
     # print('Clicks on %s: %d' % (rdata['image_name'], len(rdata['click_array'])))
     # Get true label
-    return rdata
-    class_index = int(os.path.basename(rdata['image_name']).split('_')[0])
-    print('True label: %s' % class_names[class_index])
+    class_label = rdata['image_name'].split('videos/')[1].split('/')[0]
+
+    print('True label: %s' % class_label)
     # Ask the oracle
     try:
         #import pdb;pdb.set_trace()
-        img_name_debug = rdata['image_name'].split('/')[1]
+        #img_name_debug = rdata['image_name'].split('/')[1]
         #global prediction
-        prediction = get_image_prediction(oracle, img_name_debug, rdata['click_array']) # rdata['image_name'], rdata['click_array'])
+        prediction = get_image_prediction(oracle, rdata['image_name'], rdata['click_array']) # rdata['image_name'], rdata['click_array'])
         #import pdb;pdb.set_trace()
     except:
         pass
@@ -62,7 +62,7 @@ def guess_path(): # #
     print('GUESS: {}'.format(prediction))#% prediction)
     # Allow cross origin
     resp = Response(prediction)
-    if class_names[class_index] == prediction:
+    if class_label == prediction:
         print("GUESSED CORRECTLY.")
     h = resp.headers
     h['Access-Control-Allow-Origin'] = '*'

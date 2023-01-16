@@ -29,6 +29,8 @@ var VIDEO_PATH = '/home/jay_gopal_brown_edu/clickme_video/videos';
 var all_vid_categories;
 const fs = require("fs");
 const path = require('path');
+const TOTAL_FRAMES = 201; // total frames per video
+var final_image_path;
 
 //Background
 var colors = new Array(
@@ -128,12 +130,25 @@ function getImage(ctx){
     //videolink = "/home/jay_gopal_brown_edu/clickme_video/videos/Toilet_trimmed.mp4"; // MAKE THIS ABSOLUTE
     //videolink = 'http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv';
 
-    all_vid_categories = getDirectories(VIDEO_PATH);
+    //all_vid_categories = getDirectories(VIDEO_PATH);
+    // TO DO: write a function that lists all subdirectories in a given directory
+    all_vid_categories = ['apple', 'broccoli'];
+
+    // Decide on video category (label)
     console.log(all_vid_categories);
-    global_label = videolink;
-    im_text = 'Bunny';
+    const rndIndex = randomIntFromInterval(0, all_vid_categories.length - 1)
+    global_label = VIDEO_PATH + '/' + all_vid_categories[rndIndex];
+    im_text = all_vid_categories[rndIndex];
     change_title(im_text);
-    postVideo(videolink, ctx);
+
+
+    // Decide on specific video
+    // TO DO: use function that lists all subdirectories written in previous TO DO for all_vid_names
+    starter_path = global_label + '/' + 'fgbg'
+    all_specific_vids = ['111']
+    rndIndex = randomIntFromInterval(0, all_specific_vids.length - 1)
+    specific_vid = all_specific_vids[rndIndex] 
+    postVideo(starter_path + '/' + specific_vid, ctx);
 }
 
 function postImage(image_link,ctx){
@@ -168,71 +183,105 @@ function postImage(image_link,ctx){
 
 
 function postVideo(video_link,ctx){
-    //var video = document.getElementById("video");
-    var video = document.createElement('video');
-    this.video = video;
-    video.controls = false;
-    //video.muted = false;
-    video.hidden= true;
-    video.height = canvas_width;
-    video.width = canvas_height;
-    video.autoplay = true;
-    //video.playsinline = true;
-    vidLoaded = false;
+
+    // TO DO: change master path if necessary when connecting to all images
+    master_path = video_link + '/' + 'image'
+    image = new Image();
     imgLoaded = false;
-    var sourceMP4 = document.createElement("source"); 
-    sourceMP4.type = "video/mp4";
-    //sourceMP4.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
-    sourceMP4.src = video_link; 
-    video.appendChild(sourceMP4);
-    this.video = video;
-    document.body.append(video);
-    //video.src = video_link;
-    //video.src = "../videos/Toilet.mp4";
-    //video.type = "video/mp4";
-    //video.src = 'data:video/mp4;base64,' + video_link;
-    ///video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
-    //video.src = 'https://upload.wikimedia.org/wikipedia/commons/0/09/Traffic_on_Tower_Bridge.webm';
-    //video.src = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4';
-    console.log('in postVideo');
-    var $this = this; //cache
-    frame = 0;
-    const vid_w = $this.videoWidth;
-    const vid_h = $this.videoHeight;
-    const sx_custom = (vid_w - im_crop_width)/2;
-    const sy_custom = (vid_h - im_crop_height)/2;
+    //image = video_link;
+    image.crossOrigin="Anonymous";
+    var fps = 30;
+    var endLength = 3;
 
-    video.addEventListener('play', function() {
-        console.log('in video listener');
-        var $this = this; //cache
-        frame = 0;
-        const vid_w = $this.videoWidth;
-        const vid_h = $this.videoHeight;
-        const sx_custom = (vid_w - im_crop_width)/2;
-        const sy_custom = (vid_h - im_crop_height)/2;
+    // start at random frame, with enough frames left to play video
+    frame = randomIntFromInterval(0, TOTAL_FRAMES - (fps*endLength));
 
-        (function loop() {
-          //if (!$this.paused && !$this.ended) {
-          var fps = 60;
-          var endLength = 3;
-          if (!$this.ended && frame<(endLength*fps)) {
-            //ctx.drawImage($this, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-            ctx.drawImage($this, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-            
-            frame = frame + 1;
-            setTimeout(loop, 1000 / fps); // drawing at 60 fps
-          }
-          //if(frame>((endLength*fps) - 1)){
-          else{
-            video.pause();
+    // stop after endLength seconds, going at the specified fps rate
+    var finalFrame = endLength*fps + frame;
+    (function loop() {
+        if (frame<finalFrame) {
+            final_image_path = master_path + intToTitle(frame) + ".jpg";
+            image.src = 'data:image/JPEG;base64,' + final_image_path;
+            image.onload = function(){
+                ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+                frame = frame + 1;
+            }
+
+            setTimeout(loop, 1000 / fps); // drawing at the specified fps
+        }
+        else{
             console.log('video pause statement')
-            image = $this;
             console.log('calling postImage')
             postImage(image,ctx)
-          }
-        })();
+        }
+    })();
+    
 
-    }, 0);
+    // //var video = document.getElementById("video");
+    // var video = document.createElement('video');
+    // this.video = video;
+    // video.controls = false;
+    // //video.muted = false;
+    // video.hidden= true;
+    // video.height = canvas_width;
+    // video.width = canvas_height;
+    // video.autoplay = true;
+    // //video.playsinline = true;
+    // vidLoaded = false;
+    // imgLoaded = false;
+    // var sourceMP4 = document.createElement("source"); 
+    // sourceMP4.type = "video/mp4";
+    // //sourceMP4.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
+    // sourceMP4.src = video_link; 
+    // video.appendChild(sourceMP4);
+    // this.video = video;
+    // document.body.append(video);
+    // //video.src = video_link;
+    // //video.src = "../videos/Toilet.mp4";
+    // //video.type = "video/mp4";
+    // //video.src = 'data:video/mp4;base64,' + video_link;
+    // ///video.src = "http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv";
+    // //video.src = 'https://upload.wikimedia.org/wikipedia/commons/0/09/Traffic_on_Tower_Bridge.webm';
+    // //video.src = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4';
+    // console.log('in postVideo');
+    // var $this = this; //cache
+    // frame = 0;
+    // const vid_w = $this.videoWidth;
+    // const vid_h = $this.videoHeight;
+    // const sx_custom = (vid_w - im_crop_width)/2;
+    // const sy_custom = (vid_h - im_crop_height)/2;
+
+    // video.addEventListener('play', function() {
+    //     console.log('in video listener');
+    //     var $this = this; //cache
+    //     frame = 0;
+    //     const vid_w = $this.videoWidth;
+    //     const vid_h = $this.videoHeight;
+    //     const sx_custom = (vid_w - im_crop_width)/2;
+    //     const sy_custom = (vid_h - im_crop_height)/2;
+
+    //     (function loop() {
+    //       //if (!$this.paused && !$this.ended) {
+    //       var fps = 60;
+    //       var endLength = 3;
+    //       if (!$this.ended && frame<(endLength*fps)) {
+    //         //ctx.drawImage($this, sx=sx_custom, sy=sy_custom, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    //         ctx.drawImage($this, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+            
+    //         frame = frame + 1;
+    //         setTimeout(loop, 1000 / fps); // drawing at 60 fps
+    //       }
+    //       //if(frame>((endLength*fps) - 1)){
+    //       else{
+    //         video.pause();
+    //         console.log('video pause statement')
+    //         image = $this;
+    //         console.log('calling postImage')
+    //         postImage(image,ctx)
+    //       }
+    //     })();
+
+    // }, 0);
 
     // video.onload = function(){
     //     console.log('testing within video onload')
@@ -265,6 +314,24 @@ function postVideo(video_link,ctx){
     //    ctx.drawImage(image,0,0);
     //}catch(err){}
 }
+
+function randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function intToTitle(our_int) {
+    // converts a number such as 1 to 001 for image001.JPEG (title)
+    if (our_int < 10){
+        return `00${our_int}`
+    }
+    else if (our_int < 100){
+        return `0${our_int}`
+    }
+    else{
+        return `${our_int}`
+    }
+}
+
 
 async function getVideoTrack(video_src_here) {
     const video = document.createElement("video");
@@ -539,9 +606,9 @@ function update_guess(cnn_guess,cc){
     $('#g5').html('<span style="color:' + colors[4] + '">' + cnn_guess[4] + '</span>');
 }
 
-function package_json(click_array,global_label){
+function package_json(click_array,final_image_path){
     var json_data = {};
-    json_data.image_name = global_label;
+    json_data.image_name = final_image_path;
     json_data.click_array = click_array;
     return JSON.stringify(json_data);
 }
@@ -580,7 +647,7 @@ function call_sven(){
     $.ajax({
         url: cnn_server,
         type: 'POST',
-        data: package_json(click_array,global_label),
+        data: package_json(click_array,final_image_path),
         //contentType: 'application/json',
         success: function (data) {
             console.log("Inside sven, rdata:", data);
