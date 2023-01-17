@@ -1139,6 +1139,7 @@ $(document).ready(function(){
     zoomOut();
 
     document.getElementById("instructionsButton").addEventListener("click", startTurnFunction);
+    document.getElementById("instructionsButton2").addEventListener("click", startTurnFunction);
 
     function startTurnFunction(){
         start_turn();
