@@ -155,7 +155,7 @@ function postImage(image_link,ctx){
     //image = image_link;
     image.crossOrigin="Anonymous";
     image.src = 'data:image/JPG;base64,' + image_link;
-    image.src = image_link;
+    //image.src = image_link;
     // const im_w = image.width;
     // const im_h = image.height;
     // const sx_custom = (im_w - im_crop_width)/2
@@ -203,7 +203,7 @@ function postVideo(video_link,ctx){
             console.log('calling loop once')
             final_image_path = master_path + intToTitle(frame) + ".jpg";
             image.src = 'data:image/JPG;base64,' + final_image_path;
-            image.src = final_image_path;
+            //image.src = final_image_path;
             image.onload = function(){
                 console.log('in onload')
                 ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
