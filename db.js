@@ -33,6 +33,8 @@ function prepare_click_vectors(clicks){
     return {x:x,y:y}
 }
 
+console.log('IN DB.JS NOW');
+
 var DbManager = function (username, password, host, port, dbName) {
   var self = this;
   var deferred = Q.defer();
