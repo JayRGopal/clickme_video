@@ -170,8 +170,7 @@ for vc in video_categories:
                 real_all_ims = [relevant_path + the_img for the_img in all_imgs]
 
                 # insert the video's JPG paths into specific_video_paths
-                cur.execute(
-                    "INSERT INTO specific_video_paths (video_paths, syn_name, generations) VALUES (%s,%s,%s)",
+                cur.execute("INSERT INTO specific_video_paths (video_paths, syn_name, generations) VALUES (%s,%s,%s)",
                     (real_all_ims, vc, 0)) 
 
 
