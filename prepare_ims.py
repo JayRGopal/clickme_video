@@ -5,6 +5,7 @@ from scipy import misc
 from synset import get_synset
 from data_proc_config import project_settings
 
+VIDEO_PATH = '/home/jay_gopal_brown_edu/clickme_video/videos/'
 
 def process_images(images, category_ims, mi, target_dir):
     #import pdb;pdb.set_trace()
@@ -86,6 +87,7 @@ clear_previous = False #True  # Reset images table when you run this
 create_validation_set = False
 
 # Pull all images with config.im_ext extension from im_dir
+
 images = glob(os.path.join(im_dir, '*{}'.format(config.im_ext)))
 
 #import pdb;pdb.set_trace()
@@ -125,6 +127,8 @@ for cn in range(num_categories):
             "INSERT INTO images (image_path, syn_name, generations) VALUES (%s,%s,%s)",
                 (target_path, image_id, 0)
             )
+
+
     if create_validation_set:
         # Now copy the rest of the images into the validation folder
         for mi in range(num_per_category,len(category_ims)):
@@ -147,6 +151,39 @@ for cn in range(num_categories):
 cur.execute("INSERT INTO image_count (num_images,current_generation,iteration_generation,generations_per_epoch) VALUES (%s,%s,%s,%s)",(image_count,0,0,generations_per_epoch))
 cur.execute("INSERT INTO clicks (high_score) VALUES (%s)",(0,))
 #cur.execute("INSERT INTO cnn (_id) VALUES (%s)",(0,))
+
+
+##### --- VIDEOS --- #####
+
+video_categories = os.listdir(VIDEO_PATH) # e.g. [apple, broccoli, plate, ...]
+for vc in video_categories:
+    if vc[0:1] == '.': # get .DS_Store out of here!
+        tmp = 'placeholder'
+    else:
+        relevant_path = VIDEO_PATH + vc + '/fgbg/'
+        specific_vids = os.listdir(vc)
+        for sv in specific_vids:
+            if sv[0:1] == '.': # get .DS_Store out of here!
+                tmp = 'placeholder'
+            else:
+                all_imgs = os.listdir(relevant_path + sv)
+                real_all_ims = [relevant_path + the_img for the_img in all_imgs]
+
+                # insert the video's JPG paths into specific_video_paths
+                cur.execute(
+                    "INSERT INTO specific_video_paths (video_paths, syn_name, generations) VALUES (%s,%s,%s)",
+                    (real_all_ims, vc, 0)) 
+
+
+
+
+
+
+    
+
+
+
+
 
 #Finalize and close connections
 conn.commit()
