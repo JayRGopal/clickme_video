@@ -171,7 +171,7 @@ for vc in video_categories:
 
                 # insert the video's JPG paths into specific_video_paths
                 cur.execute(
-                    "INSERT INTO specific_video_paths (video_paths, syn_name, generations) VALUES (%s,%s,%s)",
+                    "INSERT INTO 'specific_video_paths' (video_paths, syn_name, generations) VALUES (%s,%s,%s)",
                     (real_all_ims, vc, 0)) 
 
 
