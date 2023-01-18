@@ -44,6 +44,9 @@ Enter the next commands using the password created above ('serrelab')
 	create table cnn (_id bigserial primary key, sixteen_baseline_accuracy float, nineteen_baseline_accuracy float, sixteen_attention_accuracy float, nineteen_attention_accuracy float, epochs bigint, date varchar);
 	create table clicks (_id bigserial primary key, high_score float, date timestamp with time zone);
 	create table users (_id bigserial primary key, cookie varchar unique, name varchar, score float, email varchar, last_click_time timestamp with time zone);
+	
+	create table video_cats (_id bigserial primary key, video_path varchar, syn_name varchar, generations bigint);
+	create table specific_video_paths (_id bigserial primary key, video_paths varchar[], syn_name varchar, generations bigint);
 	\q
 
 Some final installs
