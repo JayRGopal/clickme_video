@@ -161,7 +161,7 @@ for vc in video_categories:
         tmp = 'placeholder'
     else:
         relevant_path = VIDEO_PATH + vc + '/fgbg/'
-        specific_vids = os.listdir(vc)
+        specific_vids = os.listdir(relevant_path)
         for sv in specific_vids:
             if sv[0:1] == '.': # get .DS_Store out of here!
                 tmp = 'placeholder'
