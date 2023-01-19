@@ -45,7 +45,7 @@ body {
 }
 
 #main_status:after {
-  content: 'CLICKME';
+  content: 'CLICKME VIDEO';
   position: absolute;
   top: 17px;
   left: 17px;
