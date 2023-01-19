@@ -197,8 +197,7 @@ function postVideo(video_link,ctx){
 
     // stop after endLength seconds, going at the specified fps rate
     var finalFrame = endLength*fps + frame;
-    finalFrame = frame; // REMOVE THIS: JUST FOR TESTING postImage()
-
+    
     (function loop() {
         if (frame<finalFrame) {
             console.log('calling loop once')
