@@ -192,13 +192,16 @@ function postVideo(video_link,ctx){
     //image = video_link;
     image.crossOrigin="Anonymous";
     var fps = 30;
-    var endLength = 0;
+    var endLength = 3;
 
     // start at random frame, with enough frames left to play video
     frame = randomIntFromInterval(0, TOTAL_FRAMES - (fps*endLength));
 
     // stop after endLength seconds, going at the specified fps rate
     var finalFrame = endLength*fps + frame;
+    
+    final_image_path = master_path + intToTitle(frame) + ".jpg";
+    image.src = 'data:image/JPG;base64,' + final_image_path;
     
     (function loop() {
         if (frame<finalFrame) {
