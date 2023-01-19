@@ -142,7 +142,7 @@ function getImage(ctx){
 
     // Decide on specific video
     // TO DO: use function that lists all subdirectories written in previous TO DO for all_vid_names
-    starter_path = global_label + '/' + 'fgbg'
+    starter_path = global_label + '/' + 'fgbgTESTINGBADPATH'
     all_specific_vids = ['111']
     rndIndex = randomIntFromInterval(0, all_specific_vids.length - 1)
     specific_vid = all_specific_vids[rndIndex] 
