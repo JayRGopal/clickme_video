@@ -142,7 +142,7 @@ function getImage(ctx){
 
     // Decide on specific video
     // TO DO: use function that lists all subdirectories written in previous TO DO for all_vid_names
-    starter_path = global_label + '/' + 'fgbgTESTINGBADPATH'
+    starter_path = global_label + '/' + 'fgbg'
     all_specific_vids = ['111']
     rndIndex = randomIntFromInterval(0, all_specific_vids.length - 1)
     specific_vid = all_specific_vids[rndIndex] 
@@ -150,11 +150,13 @@ function getImage(ctx){
 }
 
 function postImage(image_link,ctx){
-    image = new Image();
-    imgLoaded = false;
-    //image = image_link;
-    image.crossOrigin="Anonymous";
-    image.src = 'data:image/JPG;base64,' + image_link;
+    // image = new Image();
+    // imgLoaded = false;
+    // image.crossOrigin="Anonymous";
+    // image.src = 'data:image/JPG;base64,' + image_link;
+
+    image = image_link;
+
     //image.src = image_link;
     // const im_w = image.width;
     // const im_h = image.height;
@@ -190,7 +192,7 @@ function postVideo(video_link,ctx){
     //image = video_link;
     image.crossOrigin="Anonymous";
     var fps = 30;
-    var endLength = 3;
+    var endLength = 0;
 
     // start at random frame, with enough frames left to play video
     frame = randomIntFromInterval(0, TOTAL_FRAMES - (fps*endLength));
