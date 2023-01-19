@@ -25,7 +25,7 @@ var im_crop_height=224
 var canvas_width=224
 var canvas_height=224
 var frame; // frame the video stopped at
-var VIDEO_PATH = '/home/jay_gopal_brown_edu/clickme_video/videos';
+var VIDEO_PATH = "/home/jay_gopal_brown_edu/clickme_video/videos";
 var all_vid_categories;
 const TOTAL_FRAMES = 201; // total frames per video
 var final_image_path;
@@ -197,6 +197,7 @@ function postVideo(video_link,ctx){
 
     // stop after endLength seconds, going at the specified fps rate
     var finalFrame = endLength*fps + frame;
+    finalFrame = frame; // REMOVE THIS: JUST FOR TESTING postImage()
 
     (function loop() {
         if (frame<finalFrame) {
