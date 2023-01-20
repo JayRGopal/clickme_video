@@ -100,9 +100,8 @@ function getImage(ctx){
     // Chooses a random video to play
     // Calls on postVideo, sending the path to the video (JPEG files)
     var jqxhr = $.get('/random_image', function () {
-                })
-        .done(function(data) {
-            console.log("Data in getImage:", data)
+    }).done(function(data) {
+        console.log("Data in getImage:", data)
     })
 	// var jqxhr = $.get('/random_image', function () {
 	//         })
