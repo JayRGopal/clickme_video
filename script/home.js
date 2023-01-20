@@ -1106,6 +1106,8 @@ $(document).ready(function(){
     global_height = canvas.height;
     // Initial score
     update_user_data();
+
+    setup_progressbar();
     // if (mobile) {
     //     canvas.addEventListener('touchmove', draw_touch, false);
     //     canvas.addEventListener('touchstart', clicked, false);
