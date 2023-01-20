@@ -53,236 +53,98 @@ var DbManager = function (username, password, host, port, dbName) {
   return deferred.promise;
 };
 
+// DbManager.prototype.locateRandomImage = function (callback, errorCallback) {
+//   var self = this;
+//   self.client.query('SELECT * FROM image_count WHERE _id=1', function(err,res){
+//     var global_current_generation = parseInt(res.rows[0].current_generation);
+//     var iteration_generation = parseInt(res.rows[0].iteration_generation);
+//     var generations_to_epoch = parseInt(res.rows[0].generations_per_epoch);
+//     var global_num_images = parseInt(res.rows[0].num_images);
+//     var click_goal = generations_to_epoch * global_num_images;
+//     self.client.query('SELECT * FROM images WHERE generations<=$1', [iteration_generation], function (err, res) {
+//       if (err) {
+//         errorCallback(err, 'Error finding image 1');
+//         return;
+//       }
+//       var num_ims_in_gen = res.rows.length;
+//       var click_normalization = iteration_generation * (global_current_generation + 1)
+//       var clicks_to_go = (iteration_generation * global_num_images) + (global_num_images - num_ims_in_gen);
+//       var rand_selection = Math.floor((Math.random() * res.rows.length));
+//       var selected_image = res.rows[rand_selection].image_path;
+//       var selected_label = res.rows[rand_selection].syn_name;
+//       var selected_id = res.rows[rand_selection]._id;
+//       self.client.query('SELECT high_score FROM clicks',function(err,res){
+//         if (err) {
+//           errorCallback(err, 'Error looking up score');
+//           return;
+//         }
+//         var high_score = res.rows[0].high_score;
+//         var bound_data = [selected_image,selected_label,selected_id];
+//         if ((click_goal - clicks_to_go) <= 0){// trigger training routine
+//           //Backup database
+
+
+//           //Either start training or tell someone to do it
+//           var dt = new Date().getTime();
+//           var cmd = 'PGPASSWORD="' + db_pw + '" pg_dump -h 127.0.0.1 -U mircs -d mircs > db_dump/' + String(dt) + '.sql';
+//           exec(cmd, function(err, stdout, stderr) {
+//             if (err){
+//               console.log('Error dumping database');
+//               return;
+//             }
+//           })
+//           //PythonShell.run('train_model.py', function (pyerr) {
+//           PythonShell.run('send_email.py', function (pyerr) {
+//             if (pyerr) console.log(pyerr);
+//             console.log('finished training');
+//           })
+//           //Iterate current_generation by generations_per_epoch here
+//           var new_generation = global_current_generation + generations_to_epoch
+//           self.client.query('UPDATE image_count SET current_generation=$1',[new_generation],function(iterr){
+//             if (iterr) console.log(iterr);
+//               console.log('Iterated current_generation by generations_to_epoch');
+//           })
+//           //And reset iteration_generation in image_count
+//           var new_generation = global_current_generation + generations_to_epoch
+//           self.client.query('UPDATE image_count SET iteration_generation=0',function(iterr){
+//             if (iterr) console.log(iterr);
+//               console.log('Reset iteration_generation in image_count');
+//           })
+//           //And reset iteration_generation in images
+//           var new_generation = global_current_generation + generations_to_epoch
+//           self.client.query('UPDATE images SET generations=0',function(iterr){
+//             if (iterr) console.log(iterr);
+//               console.log('Reset iteration_generation in images');
+//           })
+//         }
+//         if (num_ims_in_gen <= 1){//iterate iteration_generation
+//           iteration_generation += 1
+//           self.client.query('UPDATE image_count SET iteration_generation=$1',[iteration_generation],function(iterr){
+//             if (iterr) console.log(iterr);
+//               console.log('Iterated iteration_generation');
+//           })
+//         }
+//         callback(bound_data);
+//       });
+//     });
+//   });
+// };
+
+// Returns a random video (list of image paths)
 DbManager.prototype.locateRandomImage = function (callback, errorCallback) {
   var self = this;
-  self.client.query('SELECT * FROM image_count WHERE _id=1', function(err,res){
-    var global_current_generation = parseInt(res.rows[0].current_generation);
-    var iteration_generation = parseInt(res.rows[0].iteration_generation);
-    var generations_to_epoch = parseInt(res.rows[0].generations_per_epoch);
-    var global_num_images = parseInt(res.rows[0].num_images);
-    var click_goal = generations_to_epoch * global_num_images;
-    self.client.query('SELECT * FROM images WHERE generations<=$1', [iteration_generation], function (err, res) {
-      if (err) {
-        errorCallback(err, 'Error finding image 1');
-        return;
-      }
-      var num_ims_in_gen = res.rows.length;
-      var click_normalization = iteration_generation * (global_current_generation + 1)
-      var clicks_to_go = (iteration_generation * global_num_images) + (global_num_images - num_ims_in_gen);
-      var rand_selection = Math.floor((Math.random() * res.rows.length));
-      var selected_image = res.rows[rand_selection].image_path;
-      var selected_label = res.rows[rand_selection].syn_name;
-      var selected_id = res.rows[rand_selection]._id;
-      self.client.query('SELECT high_score FROM clicks',function(err,res){
-        if (err) {
-          errorCallback(err, 'Error looking up score');
-          return;
-        }
-        var high_score = res.rows[0].high_score;
-        var bound_data = [selected_image,selected_label,selected_id];
-        if ((click_goal - clicks_to_go) <= 0){// trigger training routine
-          //Backup database
-
-
-          //Either start training or tell someone to do it
-          var dt = new Date().getTime();
-          var cmd = 'PGPASSWORD="' + db_pw + '" pg_dump -h 127.0.0.1 -U mircs -d mircs > db_dump/' + String(dt) + '.sql';
-          exec(cmd, function(err, stdout, stderr) {
-            if (err){
-              console.log('Error dumping database');
-              return;
-            }
-          })
-          //PythonShell.run('train_model.py', function (pyerr) {
-          PythonShell.run('send_email.py', function (pyerr) {
-            if (pyerr) console.log(pyerr);
-            console.log('finished training');
-          })
-          //Iterate current_generation by generations_per_epoch here
-          var new_generation = global_current_generation + generations_to_epoch
-          self.client.query('UPDATE image_count SET current_generation=$1',[new_generation],function(iterr){
-            if (iterr) console.log(iterr);
-              console.log('Iterated current_generation by generations_to_epoch');
-          })
-          //And reset iteration_generation in image_count
-          var new_generation = global_current_generation + generations_to_epoch
-          self.client.query('UPDATE image_count SET iteration_generation=0',function(iterr){
-            if (iterr) console.log(iterr);
-              console.log('Reset iteration_generation in image_count');
-          })
-          //And reset iteration_generation in images
-          var new_generation = global_current_generation + generations_to_epoch
-          self.client.query('UPDATE images SET generations=0',function(iterr){
-            if (iterr) console.log(iterr);
-              console.log('Reset iteration_generation in images');
-          })
-        }
-        if (num_ims_in_gen <= 1){//iterate iteration_generation
-          iteration_generation += 1
-          self.client.query('UPDATE image_count SET iteration_generation=$1',[iteration_generation],function(iterr){
-            if (iterr) console.log(iterr);
-              console.log('Iterated iteration_generation');
-          })
-        }
-        callback(bound_data);
-      });
-    });
-  });
-};
-
-// TO DO: MAKE THIS RETURN A RANDOM IMAGE EARLY ENOUGH IN VIDEO
-DbManager.prototype.locateRandomVideo = function (callback, errorCallback) {
-  var self = this;
-  self.client.query('SELECT * FROM image_count WHERE _id=1', function(err,res){
-    var global_current_generation = parseInt(res.rows[0].current_generation);
-    var iteration_generation = parseInt(res.rows[0].iteration_generation);
-    var generations_to_epoch = parseInt(res.rows[0].generations_per_epoch);
-    var global_num_images = parseInt(res.rows[0].num_images);
-    var click_goal = generations_to_epoch * global_num_images;
-    self.client.query('SELECT * FROM images WHERE generations<=$1', [iteration_generation], function (err, res) {
-      if (err) {
-        errorCallback(err, 'Error finding image 1');
-        return;
-      }
-      var num_ims_in_gen = res.rows.length;
-      var click_normalization = iteration_generation * (global_current_generation + 1)
-      var clicks_to_go = (iteration_generation * global_num_images) + (global_num_images - num_ims_in_gen);
-      var rand_selection = Math.floor((Math.random() * res.rows.length));
-      var selected_image = res.rows[rand_selection].image_path;
-      var selected_label = res.rows[rand_selection].syn_name;
-      var selected_id = res.rows[rand_selection]._id;
-      self.client.query('SELECT high_score FROM clicks',function(err,res){
-        if (err) {
-          errorCallback(err, 'Error looking up score');
-          return;
-        }
-        var high_score = res.rows[0].high_score;
-        var bound_data = [selected_image,selected_label,selected_id];
-        if ((click_goal - clicks_to_go) <= 0){// trigger training routine
-          //Backup database
-
-
-          //Either start training or tell someone to do it
-          var dt = new Date().getTime();
-          var cmd = 'PGPASSWORD="' + db_pw + '" pg_dump -h 127.0.0.1 -U mircs -d mircs > db_dump/' + String(dt) + '.sql';
-          exec(cmd, function(err, stdout, stderr) {
-            if (err){
-              console.log('Error dumping database');
-              return;
-            }
-          })
-          //PythonShell.run('train_model.py', function (pyerr) {
-          PythonShell.run('send_email.py', function (pyerr) {
-            if (pyerr) console.log(pyerr);
-            console.log('finished training');
-          })
-          //Iterate current_generation by generations_per_epoch here
-          var new_generation = global_current_generation + generations_to_epoch
-          self.client.query('UPDATE image_count SET current_generation=$1',[new_generation],function(iterr){
-            if (iterr) console.log(iterr);
-              console.log('Iterated current_generation by generations_to_epoch');
-          })
-          //And reset iteration_generation in image_count
-          var new_generation = global_current_generation + generations_to_epoch
-          self.client.query('UPDATE image_count SET iteration_generation=0',function(iterr){
-            if (iterr) console.log(iterr);
-              console.log('Reset iteration_generation in image_count');
-          })
-          //And reset iteration_generation in images
-          var new_generation = global_current_generation + generations_to_epoch
-          self.client.query('UPDATE images SET generations=0',function(iterr){
-            if (iterr) console.log(iterr);
-              console.log('Reset iteration_generation in images');
-          })
-        }
-        if (num_ims_in_gen <= 1){//iterate iteration_generation
-          iteration_generation += 1
-          self.client.query('UPDATE image_count SET iteration_generation=$1',[iteration_generation],function(iterr){
-            if (iterr) console.log(iterr);
-              console.log('Iterated iteration_generation');
-          })
-        }
-        callback(bound_data);
-      });
-    });
-  });
-};
-
-// TO DO: MAKE THIS GIVE THE NEXT IMAGE
-DbManager.prototype.locateNextImage = function (callback, errorCallback) {
-  var self = this;
-  self.client.query('SELECT * FROM image_count WHERE _id=1', function(err,res){
-    var global_current_generation = parseInt(res.rows[0].current_generation);
-    var iteration_generation = parseInt(res.rows[0].iteration_generation);
-    var generations_to_epoch = parseInt(res.rows[0].generations_per_epoch);
-    var global_num_images = parseInt(res.rows[0].num_images);
-    var click_goal = generations_to_epoch * global_num_images;
-    self.client.query('SELECT * FROM images WHERE generations<=$1', [iteration_generation], function (err, res) {
-      if (err) {
-        errorCallback(err, 'Error finding image 1');
-        return;
-      }
-      var num_ims_in_gen = res.rows.length;
-      var click_normalization = iteration_generation * (global_current_generation + 1)
-      var clicks_to_go = (iteration_generation * global_num_images) + (global_num_images - num_ims_in_gen);
-      var rand_selection = Math.floor((Math.random() * res.rows.length));
-      var selected_image = res.rows[rand_selection].image_path;
-      var selected_label = res.rows[rand_selection].syn_name;
-      var selected_id = res.rows[rand_selection]._id;
-      self.client.query('SELECT high_score FROM clicks',function(err,res){
-        if (err) {
-          errorCallback(err, 'Error looking up score');
-          return;
-        }
-        var high_score = res.rows[0].high_score;
-        var bound_data = [selected_image,selected_label,selected_id];
-        if ((click_goal - clicks_to_go) <= 0){// trigger training routine
-          //Backup database
-
-
-          //Either start training or tell someone to do it
-          var dt = new Date().getTime();
-          var cmd = 'PGPASSWORD="' + db_pw + '" pg_dump -h 127.0.0.1 -U mircs -d mircs > db_dump/' + String(dt) + '.sql';
-          exec(cmd, function(err, stdout, stderr) {
-            if (err){
-              console.log('Error dumping database');
-              return;
-            }
-          })
-          //PythonShell.run('train_model.py', function (pyerr) {
-          PythonShell.run('send_email.py', function (pyerr) {
-            if (pyerr) console.log(pyerr);
-            console.log('finished training');
-          })
-          //Iterate current_generation by generations_per_epoch here
-          var new_generation = global_current_generation + generations_to_epoch
-          self.client.query('UPDATE image_count SET current_generation=$1',[new_generation],function(iterr){
-            if (iterr) console.log(iterr);
-              console.log('Iterated current_generation by generations_to_epoch');
-          })
-          //And reset iteration_generation in image_count
-          var new_generation = global_current_generation + generations_to_epoch
-          self.client.query('UPDATE image_count SET iteration_generation=0',function(iterr){
-            if (iterr) console.log(iterr);
-              console.log('Reset iteration_generation in image_count');
-          })
-          //And reset iteration_generation in images
-          var new_generation = global_current_generation + generations_to_epoch
-          self.client.query('UPDATE images SET generations=0',function(iterr){
-            if (iterr) console.log(iterr);
-              console.log('Reset iteration_generation in images');
-          })
-        }
-        if (num_ims_in_gen <= 1){//iterate iteration_generation
-          iteration_generation += 1
-          self.client.query('UPDATE image_count SET iteration_generation=$1',[iteration_generation],function(iterr){
-            if (iterr) console.log(iterr);
-              console.log('Iterated iteration_generation');
-          })
-        }
-        callback(bound_data);
-      });
-    });
+  self.client.query('SELECT * FROM specific_video_paths', function (err, res) {
+    if (err) {
+      errorCallback(err, 'Error finding image 1');
+      return;
+    }
+    var num_vids = res.rows.length;
+    var rand_selection = Math.floor((Math.random() * res.rows.length));
+    var selected_video = res.rows[rand_selection].video_paths;
+    var selected_label = res.rows[rand_selection].syn_name;
+    var selected_id = res.rows[rand_selection]._id;
+    var bound_data = [selected_video,selected_label,selected_id];
+    callback(bound_data);
   });
 };
 

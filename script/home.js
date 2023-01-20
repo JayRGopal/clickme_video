@@ -95,17 +95,15 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
   }
 }
 
-function getDirectories(path) {
-    return fs.readdirSync(path).filter(function (file) {
-        return fs.statSync(path+'/'+file).isDirectory();
-    });
-}
-
 // Main content
 function getImage(ctx){
     // Chooses a random video to play
     // Calls on postVideo, sending the path to the video (JPEG files)
-
+    var jqxhr = $.get('/random_image', function () {
+                })
+        .done(function(data) {
+            console.log("Data in getImage:", data)
+    })
 	// var jqxhr = $.get('/random_image', function () {
 	//         })
     // .done(function(data) {
@@ -202,7 +200,7 @@ function postVideo(video_link,ctx){
     
     final_image_path = master_path + intToTitle(frame) + ".jpg";
     image.src = 'data:image/JPG;base64,' + final_image_path;
-    
+
     (function loop() {
         if (frame<finalFrame) {
             console.log('calling loop once')
