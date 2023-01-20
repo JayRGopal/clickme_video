@@ -127,24 +127,29 @@ function getImage(ctx){
     //videolink = 'http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv';
 
     //all_vid_categories = getDirectories(VIDEO_PATH);
-    // TO DO: write a function that lists all subdirectories in a given directory
-    all_vid_categories = ['apple', 'broccoli'];
+    
+    
+    
+    
+    
+    // // TO DO: write a function that lists all subdirectories in a given directory
+    // all_vid_categories = ['apple', 'broccoli'];
 
-    // Decide on video category (label)
-    console.log(all_vid_categories);
-    var rndIndex = randomIntFromInterval(0, all_vid_categories.length - 1)
-    global_label = VIDEO_PATH + '/' + all_vid_categories[rndIndex];
-    im_text = all_vid_categories[rndIndex];
-    change_title(im_text);
+    // // Decide on video category (label)
+    // console.log(all_vid_categories);
+    // var rndIndex = randomIntFromInterval(0, all_vid_categories.length - 1)
+    // global_label = VIDEO_PATH + '/' + all_vid_categories[rndIndex];
+    // im_text = all_vid_categories[rndIndex];
+    // change_title(im_text);
 
 
-    // Decide on specific video
-    // TO DO: use function that lists all subdirectories written in previous TO DO for all_vid_names
-    starter_path = global_label + '/' + 'fgbg'
-    all_specific_vids = ['111']
-    rndIndex = randomIntFromInterval(0, all_specific_vids.length - 1)
-    specific_vid = all_specific_vids[rndIndex] 
-    postVideo(starter_path + '/' + specific_vid, ctx);
+    // // Decide on specific video
+    // // TO DO: use function that lists all subdirectories written in previous TO DO for all_vid_names
+    // starter_path = global_label + '/' + 'fgbg'
+    // all_specific_vids = ['111']
+    // rndIndex = randomIntFromInterval(0, all_specific_vids.length - 1)
+    // specific_vid = all_specific_vids[rndIndex] 
+    // postVideo(starter_path + '/' + specific_vid, ctx);
 }
 
 function postImage(image_link,ctx){
