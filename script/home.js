@@ -210,6 +210,7 @@ function postVideo(video_link,ctx){
             console.log('calling loop once')
             final_image_path = master_path + intToTitle(frame) + ".jpg";
             image.src = 'data:image/JPG;base64,' + final_image_path;
+            image.src = "images/1_100.jpeg"
             //image.src = final_image_path;
             image.onload = function(){
                 console.log('in onload')
