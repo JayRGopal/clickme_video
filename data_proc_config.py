@@ -36,7 +36,7 @@ class Map(dict):
         del self.__dict__[key]
 
 def project_settings():
-    node_name = os.uname()[1]  # If you want a machine-conditional path use this
+    #node_name = os.uname()[1]  # If you want a machine-conditional path use this
 
     model_path = "/path/to/model_weigths"
     imagenet_train_path = "images"
