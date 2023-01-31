@@ -209,7 +209,7 @@ function postVideo(video_link,ctx){
     final_image_path = master_path + intToTitle(frame) + ".jpg";
     image.src = 'data:image/JPG;base64,' + final_image_path;
 
-    image.src = "images/1_100.jpeg"
+    image.src = "images/1_1000.jpeg"
     ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
 
     (function loop() {
