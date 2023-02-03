@@ -1,4 +1,4 @@
-const { response } = require("express");
+
 
 var global_image_link; //globals :(. Should rethink this at some point.
 var global_label, im_text;
@@ -1109,7 +1109,7 @@ function getImagePath() {
         url: '/imagePath',
         //data: data,
         dataType: 'application/json',
-        success:  function (){
+        success:  function (response){
             res = response.json()
             console.log(res.files)
         }
