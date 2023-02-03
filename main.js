@@ -30,6 +30,8 @@ var pgUser = 'mircs';
 var pgPassword = 'serrelab';
 
 const util = require('util');
+const express = require('express');
+const cors = require('cors');
 
 var guess_server = 'http://localhost:7777/guess';
 
@@ -37,6 +39,8 @@ app.use('/node_modules',  express.static(__dirname + '/node_modules'));
 app.use('/style',  express.static(__dirname + '/style'));
 app.use('/script',  express.static(__dirname + '/script'));
 app.use('/web_content', express.static(__dirname + '/web_content'));
+app.use(express.json());
+app.use(cors());
 
 app.post('/guess', function(req,res) {
     var x = request(guess_server);
