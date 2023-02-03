@@ -3,6 +3,8 @@ process.on('uncaughtException', function (error) {
 });
 
 var express = require('express');
+const express = require('express');
+const cors = require('cors');
 var app = express();
 var pg = require('pg');
 var Server = require('./server.js');
@@ -30,17 +32,16 @@ var pgUser = 'mircs';
 var pgPassword = 'serrelab';
 
 const util = require('util');
-const express = require('express');
-const cors = require('cors');
 
 var guess_server = 'http://localhost:7777/guess';
+
+app.use(express.json());
+app.use(cors());
 
 app.use('/node_modules',  express.static(__dirname + '/node_modules'));
 app.use('/style',  express.static(__dirname + '/style'));
 app.use('/script',  express.static(__dirname + '/script'));
 app.use('/web_content', express.static(__dirname + '/web_content'));
-app.use(express.json());
-app.use(cors());
 
 app.post('/guess', function(req,res) {
     var x = request(guess_server);
@@ -58,9 +59,7 @@ app.post('/imagePath', function(req, res) {
         res.json({files: files})
       }
     })
-    res.json({
-      
-    })
+    
 
 });
 
