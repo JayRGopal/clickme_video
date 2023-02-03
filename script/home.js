@@ -1108,10 +1108,10 @@ function getImagePath() {
         type: 'POST',
         url: '/imagePath',
         //data: data,
-        dataType: 'application/json',
+        dataType: 'json',
         success:  function (response){
-            res = response.json()
-            console.log(res.files)
+            //res = response.json()
+            console.log(response)
         }
     }).done(function( msg ) {
         console.log(msg);
