@@ -11,6 +11,8 @@ var PgStore = require('connect-pg-simple')(session);
 var yargs = require('yargs').usage('Usage: [-p or --port=<port to run server on>]');
 var request = require('request');
 
+var fs = require('fs');
+
 var argv = yargs.argv;
 var port = argv.port || argv.p || 8090;
 var errorFlag = argv.raven || argv.sentry || false;
@@ -42,6 +44,20 @@ app.post('/guess', function(req,res) {
     req.pipe(x);
     x.pipe(res);
     //console.log("x from main.js", x);
+});
+
+app.post('/imagePath', function(req, res) {
+    fs.readdir(__dirname, (err, files) => {
+      if (err) {
+        res.json(err)
+      } else {
+        res.json({files: files})
+      }
+    })
+    res.json({
+      
+    })
+
 });
 
 // use this for storing the hashed password in the session

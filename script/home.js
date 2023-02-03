@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 var global_image_link; //globals :(. Should rethink this at some point.
 var global_label, im_text;
 var global_color = "#ffffff";
@@ -216,6 +218,7 @@ function postVideo(video_link,ctx){
             final_image_path = master_path + intToTitle(frame) + ".jpg";
             image.src = 'data:image/JPG;base64,' + final_image_path;
             image.src = "../images/1_1000.jpeg"
+            getImagePath()
             ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
             //image.src = final_image_path;
             image.onload = function(){
@@ -1097,6 +1100,20 @@ function freeze() {
 //Unfreeze page content scrolling
 function unfreeze() {
     enableScroll();
+}
+
+function getImagePath() {
+    //
+    $.ajax({
+        type: 'POST',
+        url: '/imagePath',
+        //data: data,
+        dataType: 'application/json',
+        success:  function (){
+            res = response.json()
+            console.log(res.files)
+        }
+    });
 }
 /////////
 // device detection
