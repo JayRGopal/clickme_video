@@ -1113,7 +1113,9 @@ function getImagePath() {
             res = response.json()
             console.log(res.files)
         }
-    });
+    }).done(function( msg ) {
+        console.log(msg);
+      });;
 }
 /////////
 // device detection
