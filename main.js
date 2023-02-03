@@ -54,7 +54,7 @@ app.post('/guess', function(req,res) {
 app.post('/imagePath', function(req, res) {
     fs.readdir(__dirname, (err, files) => {
       if (err) {
-        res.json(err)
+        res.json("wack")
       } else {
         res.json({files: files})
       }
