@@ -204,6 +204,7 @@ function postVideo(video_link,ctx){
 
     // start at random frame, with enough frames left to play video
     frame = randomIntFromInterval(0, TOTAL_FRAMES - (fps*endLength));
+    frame = 0
 
     // stop after endLength seconds, going at the specified fps rate
     var finalFrame = endLength*fps + frame;
@@ -217,9 +218,9 @@ function postVideo(video_link,ctx){
             console.log('calling loop once')
             final_image_path = master_path + intToTitle(frame) + ".jpg";
             image.src = 'data:image/JPG;base64,' + final_image_path;
-            image.src = "../images/1_1000.jpeg"
+            image.src = "web_content/apple/image" + intToTitle(frame) + ".jpg"
             getImagePath()
-            ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+            //ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
             //image.src = final_image_path;
             image.onload = function(){
                 console.log('in onload')
