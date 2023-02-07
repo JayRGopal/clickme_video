@@ -52,7 +52,10 @@ app.post('/guess', function(req,res) {
 });
 
 app.post('/imagePath', function(req, res) {
-  res.json("hello")
+  var s = "hi"
+  
+  req.pipe(s)
+  s.pipe(res)
   /*
     fs.readdir(__dirname, (err, files) => {
       if (err) {
