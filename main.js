@@ -52,6 +52,8 @@ app.post('/guess', function(req,res) {
 });
 
 app.post('/imagePath', function(req, res) {
+  res.json("hello")
+  /*
     fs.readdir(__dirname, (err, files) => {
       if (err) {
         res.json("wack")
@@ -59,6 +61,8 @@ app.post('/imagePath', function(req, res) {
         res.json({files: files})
       }
     })
+
+  */
     
 
 });
