@@ -32,11 +32,13 @@ var pgUser = 'mircs';
 var pgPassword = 'serrelab';
 
 const util = require('util');
+const bodyParser = require('body-parser');
 
 var guess_server = 'http://localhost:7777/guess';
 
 app.use(express.json());
 app.use(cors());
+app,use(bodyParser.json())
 
 app.use('/node_modules',  express.static(__dirname + '/node_modules'));
 app.use('/style',  express.static(__dirname + '/style'));
