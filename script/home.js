@@ -1103,20 +1103,15 @@ function unfreeze() {
     enableScroll();
 }
 
-function getImagePath() {
-    //
-    $.ajax({
-        type: 'POST',
-        url: '/imagePath',
-        //data: data,
-        dataType: 'json',
-        success:  function (response){
-            //res = response.json()
-            console.log(response)
-        }
-    }).done(function( msg ) {
-        console.log(msg);
-      });;
+const getImagePath = () => {
+    fetch('http://35.224.74.65:8090/imagePath', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    }).then(response => console.log(response.json()))
 }
 /////////
 // device detection
