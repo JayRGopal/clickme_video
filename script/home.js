@@ -175,14 +175,21 @@ function postImage(image_link,ctx){
     // ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
     // imgLoaded = true;
     // draw_scored_box(0);
-    image.onload = function(){
-        console.log('in postImage onload');
-        ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+
+
+    // image.onload = function(){
+    //     console.log('in postImage onload');
+    //     ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
         
-        //ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-        imgLoaded = true;
-        draw_scored_box(0);
-    }
+    //     //ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    //     imgLoaded = true;
+    //     draw_scored_box(0);
+    // }
+    console.log('in postImage onload');
+    ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    
+    imgLoaded = true;
+    draw_scored_box(0);
 
 
     //try{
@@ -223,7 +230,8 @@ function postVideo(video_link,ctx){
             //ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
             //image.src = final_image_path;
             image.onload = function(){
-                console.log('in onload')
+                console.log('in onload');
+                console.log(frame);
                 ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
                 // ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
                 frame = frame + 1;
