@@ -2,8 +2,8 @@ process.on('uncaughtException', function (error) {
   console.log(error.stack); // eslint-disable-line no-console
 });
 
-var express = require('express');
-//const express = require('express');
+//var express = require('express');
+const express = require('express');
 const cors = require('cors');
 var app = express();
 var pg = require('pg');
