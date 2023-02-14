@@ -3,7 +3,7 @@ process.on('uncaughtException', function (error) {
 });
 
 var express = require('express');
-const express = require('express');
+//const express = require('express');
 const cors = require('cors');
 var app = express();
 var pg = require('pg');
