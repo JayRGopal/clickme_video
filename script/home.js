@@ -232,8 +232,8 @@ function postVideo(video_link,ctx){
             image.onload = function(){
                 console.log('in onload');
                 console.log(frame);
-                ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-                // ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+                //ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+                ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
                 frame = frame + 1;
                 setTimeout(loop, 1000 / fps); // drawing at the specified fps
             }
