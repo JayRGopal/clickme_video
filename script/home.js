@@ -239,6 +239,7 @@ function postVideo(video_link,ctx){
             }
         }
         else{
+            frame = frame - 1; // the last increment needs to be canceled out
             console.log('video pause statement')
             console.log('calling postImage')
             postImage(image,ctx)
