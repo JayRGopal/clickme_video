@@ -1107,7 +1107,7 @@ const getImagePath = () => {
     fetch('http://35.224.74.65:8090/imagePath', {
         method: 'post',
         headers: {'Content-Type': 'application/json'}
-    }).then(response => console.log(response.json()))
+    }).then(response => console.log(response))
 }
 /////////
 // device detection
