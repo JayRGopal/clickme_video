@@ -175,21 +175,14 @@ function postImage(image_link,ctx){
     // ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
     // imgLoaded = true;
     // draw_scored_box(0);
-
-
-    // image.onload = function(){
-    //     console.log('in postImage onload');
-    //     ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+    image.onload = function(){
+        console.log('in postImage onload');
+        ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
         
-    //     //ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-    //     imgLoaded = true;
-    //     draw_scored_box(0);
-    // }
-    console.log('in postImage onload');
-    ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-    
-    imgLoaded = true;
-    draw_scored_box(0);
+        //ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+        imgLoaded = true;
+        draw_scored_box(0);
+    }
 
 
     //try{
@@ -225,21 +218,19 @@ function postVideo(video_link,ctx){
             console.log('calling loop once')
             final_image_path = master_path + intToTitle(frame) + ".jpg";
             image.src = 'data:image/JPG;base64,' + final_image_path;
-            image.src = "videos/apple/fgbg/image" + intToTitle(frame) + ".jpg"
+            image.src = "web_content/apple/image" + intToTitle(frame) + ".jpg"
             getImagePath()
             //ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
             //image.src = final_image_path;
             image.onload = function(){
-                console.log('in onload');
-                console.log(frame);
-                //ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
-                ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+                console.log('in onload')
+                ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
+                // ctx.drawImage(image, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
                 frame = frame + 1;
                 setTimeout(loop, 1000 / fps); // drawing at the specified fps
             }
         }
         else{
-            frame = frame - 1; // the last increment needs to be canceled out
             console.log('video pause statement')
             console.log('calling postImage')
             postImage(image,ctx)
