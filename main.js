@@ -2,7 +2,6 @@ process.on('uncaughtException', function (error) {
   console.log(error.stack); // eslint-disable-line no-console
 });
 
-//var express = require('express');
 const express = require('express');
 const cors = require('cors');
 var app = express();
@@ -38,7 +37,7 @@ var guess_server = 'http://localhost:7777/guess';
 
 app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 app.use('/node_modules',  express.static(__dirname + '/node_modules'));
 app.use('/style',  express.static(__dirname + '/style'));
@@ -54,7 +53,7 @@ app.post('/guess', function(req,res) {
 });
 
 app.post('/imagePath', function(req, res) {
-  res.send("hellloooooo")
+  res.json("hellloooooo")
   /*
     fs.readdir(__dirname, (err, files) => {
       if (err) {
