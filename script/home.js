@@ -218,7 +218,7 @@ function postVideo(video_link,ctx){
             console.log('calling loop once')
             final_image_path = master_path + intToTitle(frame) + ".jpg";
             image.src = 'data:image/JPG;base64,' + final_image_path;
-            image.src = "web_content/apple/fgbg/" + intToTitle(frame) + ".jpg"
+            image.src = "web_content/apple/" + intToTitle(frame) + ".jpg"
             getImagePath()
             //ctx.drawImage(image, sx=(this.width - im_crop_width)/2, sy=(this.height - im_crop_height)/2, sWidth=im_crop_width, sHeight=im_crop_height, dx=0, dy=0, dWidth=canvas_width, dHeight=canvas_height);
             //image.src = final_image_path;
