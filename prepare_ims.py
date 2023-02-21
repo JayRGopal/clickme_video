@@ -5,7 +5,7 @@ from scipy import misc
 from synset import get_synset
 from data_proc_config import project_settings
 
-VIDEO_PATH = '/home/jay_gopal_brown_edu/clickme_video/videos/'
+VIDEO_PATH = '/home/timothy_desimone_brown_edu/clickme_video/videos/'
 
 def process_images(images, category_ims, mi, target_dir):
     #import pdb;pdb.set_trace()
